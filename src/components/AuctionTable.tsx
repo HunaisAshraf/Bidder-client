@@ -13,6 +13,8 @@ import { axiosInstance } from "@/utils/constants";
 import moment from "moment";
 import EditAuctionModal from "./EditAuctonModal";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
+import Image from "next/image";
 
 type Auction = {
   _id: string;
@@ -23,62 +25,43 @@ type Auction = {
   endDate: Date;
   images: string[];
   isListed: string;
+  completed: boolean;
 };
-
-// function createData(
-//   name: string,
-//   price: number,
-//   description: string,
-//   startDate: number,
-//   endDate: number,
-//   images: string[],
-//   status: number
-// ) {
-//   return { name, price, description, startDate, endDate, images, status };
-// }
-
-// const rows = [
-//   // createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-//   // createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-//   // createData("Eclair", 262, 16.0, 24, 6.0),
-//   // createData("Cupcake", 305, 3.7, 67, 4.3),
-//   // createData("Gingerbread", 356, 16.0, 49, 3.9),
-// ];
 
 export default function AuctionTable() {
   const [auctions, setAuctions] = React.useState<Auction[]>();
   const [dataChange, setDataChange] = React.useState(false);
-  console.log("all auct", auctions);
   const router = useRouter();
-  const getAuctions = async () => {
+
+  const handleChangeStatus = async (id: string) => {
     try {
-      const { data } = await axiosInstance.get("/api/auction/get-auctions");
-
-      console.log(data);
+      const { data } = await axiosInstance.put(
+        `/api/auction/auction-status/${id}`
+      );
       if (data.success) {
-        setAuctions(data?.auctions);
-        console.log("auction", auctions);
-
-        // for (let auction of data?.auctions) {
-        //   rows.push(
-        //     createData(
-        //       auction?.itemName,
-        //       auction?.basePrice,
-        //       auction?.description,
-        //       auction?.startDate,
-        //       auction?.endDate,
-        //       auction?.images,
-        //       auction?.status
-        //     )
-        //   );
-        // }
+        toast.success("status changed successfully");
+        setDataChange(!dataChange);
       }
     } catch (error) {
       console.log(error);
+      toast.error("failed to change status");
     }
   };
 
   React.useEffect(() => {
+    const getAuctions = async () => {
+      try {
+        const { data } = await axiosInstance.get("/api/auction/get-auctions");
+
+        console.log(data);
+        if (data.success) {
+          setAuctions(data?.auctions);
+          console.log("auction", auctions);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
     getAuctions();
   }, [dataChange]);
 
@@ -112,8 +95,9 @@ export default function AuctionTable() {
                   {auction?.itemName}
                 </TableCell>
                 <TableCell align="right">
-                  <img
-                    className="h-24 w-24"
+                  <Image
+                    width={96}
+                    height={96}
                     src={auction?.images[0]}
                     alt={auction?.itemName}
                   />
@@ -126,15 +110,22 @@ export default function AuctionTable() {
                   {moment(auction?.endDate).format("lll")}
                 </TableCell>
                 <TableCell align="right">
-                  {auction?.isListed ? (
-                    <span className="bg-green-500 text-white font-semibold py-2 px-3 rounded">
-                      listed
+                  {auction?.completed ? (
+                    <span className="bg-yellow-500 text-white font-semibold py-2 px-3 rounded">
+                      Completed
                     </span>
                   ) : (
-                    <span className="bg-red-500 text-white font-semibold py-2 px-3 rounded">
-                      {" "}
-                      notlisted
-                    </span>
+                    <button onClick={() => handleChangeStatus(auction._id)}>
+                      {auction?.isListed ? (
+                        <span className="bg-green-500 text-white font-semibold py-2 px-3 rounded">
+                          listed
+                        </span>
+                      ) : (
+                        <span className="bg-red-500 text-white font-semibold py-2 px-3 rounded">
+                          Unlisted
+                        </span>
+                      )}
+                    </button>
                   )}
                 </TableCell>
                 <TableCell align="right">

@@ -21,6 +21,7 @@ import Badge from "@mui/material/Badge";
 import CloseIcon from "@mui/icons-material/Close";
 import MailIcon from "@mui/icons-material/Mail";
 import { axiosInstance } from "@/utils/constants";
+import Image from "next/image";
 
 const style = {
   position: "absolute" as "absolute",
@@ -305,8 +306,9 @@ export default function AddAuctionModal({
                             badgeContent={<CloseIcon />}
                             color="error"
                           >
-                            <img
-                              onClick={() => handleDelete(image)}
+                            <Image onClick={() => handleDelete(image)}
+                            width={180}
+                            height={128}
                               className="h-32 w-44 my-3 shadow-lg "
                               src={URL.createObjectURL(image)}
                               alt={image.name}

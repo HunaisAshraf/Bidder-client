@@ -1,7 +1,7 @@
 export type ReactSetState = React.Dispatch<React.SetStateAction<string>>;
 
 export type User = {
-  id: number;
+  id: string;
   name: string;
   email: string;
   phone?: string;

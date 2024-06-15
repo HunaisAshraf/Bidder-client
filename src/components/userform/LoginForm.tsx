@@ -41,7 +41,7 @@ export default function LoginForm() {
 
         dispatch(setUser(data.user));
 
-        router.push("/");
+        router.replace("/");
       }
     } catch (error: any) {
       console.log(error);

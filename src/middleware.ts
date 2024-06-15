@@ -2,7 +2,7 @@ import { NextResponse, NextRequest } from "next/server";
 
 const protectedRouteRegex = /^\/profile\/.*$/;
 const protectedRoute = ["/profile", "/watchlist"];
-const authRoute = ["/login", "/signup"];
+const authRoute = ["/login", "/signup","/update-password","/forgot-password"];
 
 export function middleware(req: NextRequest) {
   const token = req.cookies.get("token")?.value;

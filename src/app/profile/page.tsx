@@ -1,6 +1,6 @@
 "use client";
 
-import ProfilePictureModal from "@/components/ProfilePictureModal";
+import ProfilePictureModal from "@/components/EditProfileComponent";
 import { useAppSelector } from "@/lib/store/hooks";
 
 export default function Profile() {

@@ -12,7 +12,9 @@ export default function Signup() {
     <div className="lg:mx-96 lg:shadow-lg flex justify-center min-h-[91vh]">
       <div>
         <SignupForm />
-        <h1 className="text-center text-blue-600 my-3">Forgot password?</h1>
+        <p className="text-center text-blue-600 my-3">
+          <Link href="/forgot-password">Forgot password?</Link>
+        </p>
         <GoogleSigninButton />
 
         {/* <div className="flex justify-center items-center gap-3">

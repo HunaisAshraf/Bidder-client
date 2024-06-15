@@ -11,7 +11,7 @@ import { useAppDispatch } from "@/lib/store/hooks";
 export default function GoogleSigninButton() {
   const { data: session, status } = useSession();
   const router = useRouter();
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
   const handleGoogleLogin = async () => {
     try {
@@ -21,41 +21,40 @@ export default function GoogleSigninButton() {
     }
   };
 
-  const saveUserData = async () => {
-    try {
-      const userData = {
-        name: session?.user?.name,
-        email: session?.user?.email,
-        profilePicture: session?.user?.image,
-      };
-
-      const { data } = await axiosInstance.post(
-        "/api/auth/google-signup",
-        userData
-      );
-
-      console.log(data);
-
-      if (data?.success) {
-        localStorage.setItem("auth", JSON.stringify(data?.user));
-        localStorage.setItem("token", data.token);
-        dispatch(setUser(data.user));
-        if (!data?.user?.role) {
-          router.push("/role");
-        } else {
-          router.push("/");
-        }
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   useEffect(() => {
+    const saveUserData = async () => {
+      try {
+        const userData = {
+          name: session?.user?.name,
+          email: session?.user?.email,
+          profilePicture: session?.user?.image,
+        };
+
+        const { data } = await axiosInstance.post(
+          "/api/auth/google-signup",
+          userData
+        );
+
+        console.log(data);
+
+        if (data?.success) {
+          localStorage.setItem("auth", JSON.stringify(data?.user));
+          localStorage.setItem("token", JSON.stringify(data.token));
+          dispatch(setUser(data.user));
+          if (!data?.user?.role) {
+            router.push("/role");
+          } else {
+            router.push("/");
+          }
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
     if (status === "authenticated" && session?.user) {
       saveUserData();
     }
-  }, [status, session, router]);
+  }, [status, session, router, dispatch]);
 
   return (
     <div className="flex justify-center items-center gap-3">

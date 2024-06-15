@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import Input from "../Input";
 import Spinner from "../Spinner";
+import toast,{Toaster} from "react-hot-toast";
 
 type FormValues = {
   name: string;
@@ -43,18 +44,20 @@ export default function SignupForm() {
           profilePicture: data?.user?.profilePicture,
         };
         localStorage.setItem("auth", JSON.stringify(user));
-        localStorage.setItem("token", data?.token);
+        localStorage.setItem("token", JSON.stringify(data?.token));
 
         setLoading(false);
-        router.push("/role");
+        router.replace("/role");
       }
     } catch (error) {
       console.log(error);
       setLoading(false);
+      toast.error("failed to signup")
     }
   };
   return (
     <div>
+      <Toaster />
       <form
         className="w-[400px]"
         onSubmit={handleSubmit(handleSignup)}

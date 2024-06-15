@@ -12,6 +12,7 @@ import { signOut, useSession } from "next-auth/react";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { blue } from "@mui/material/colors";
 import { axiosInstance } from "@/utils/constants";
+import Image from "next/image";
 
 const links = [
   { title: "Home", href: "/" },
@@ -66,7 +67,10 @@ export default function Header() {
     if (storedUser && !user?.email) {
       dispatch(setUser(JSON.parse(storedUser)));
     }
-  }, [session, dispatch, user?.email]);
+    if (user && !user?.role) {
+      router.push("/role");
+    }
+  }, [user, router, session, dispatch]);
 
   return (
     <header className="bg-white py-3">
@@ -132,10 +136,12 @@ export default function Header() {
 
               <button onClick={() => router.push("/profile/details")}>
                 {user.profilePicture ? (
-                  <img
+                  <Image
+                    width={40}
+                    height={40}
                     src={user?.profilePicture}
                     alt={user.name}
-                    className="h-10 w-10 rounded-full"
+                    className=" rounded-full"
                   />
                 ) : (
                   <AccountCircleIcon

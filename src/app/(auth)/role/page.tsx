@@ -6,23 +6,24 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import WorkIcon from "@mui/icons-material/Work";
 import { useRouter } from "next/navigation";
 import { axiosInstance } from "@/utils/constants";
-import { useAppDispatch } from "@/lib/store/hooks";
+import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 import { setUser } from "@/lib/store/features/userSlice";
 
 export default function Role() {
   const router = useRouter();
   const dispatch = useAppDispatch();
+  const user = useAppSelector(state=>state.users.user)
 
   const handleUpdateRole = async (role: string) => {
     try {
+
+
+      console.log(localStorage.getItem("token"));
+      
       const { data } = await axiosInstance.put(
-        "/api/auth/update-user",
+        `/api/auth/update-user/${user?.id}`,
         { role },
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
+
       );
       console.log(data);
       if (data.success) {
@@ -34,7 +35,7 @@ export default function Role() {
         dispatch(setUser(user));
         localStorage.setItem("auth", JSON.stringify(user));
 
-        router.push("/");
+        router.replace("/");
       }
     } catch (error) {
       console.log(error);

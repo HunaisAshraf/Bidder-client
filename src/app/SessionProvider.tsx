@@ -18,7 +18,7 @@ export const NextAuthProvider = ({ children }: NextAuthProviderProps) => {
     if (user) {
       dispatch(setUser(user));
     }
-  }, []);
+  }, [dispatch]);
 
   return <SessionProvider>{children}</SessionProvider>;
 };

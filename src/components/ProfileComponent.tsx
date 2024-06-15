@@ -3,11 +3,12 @@
 import { useAppSelector } from "@/lib/store/hooks";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import ProfilePictureModal from "./ProfilePictureModal";
+import EditProfileComponent from "./EditProfileComponent";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 import { Router } from "next/router";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 const links = [
   { title: "My Details", href: "/profile/details" },
@@ -16,6 +17,8 @@ const links = [
     href: "/profile/bidding-history",
     role: "bidder",
   },
+
+  { title: "Auction Won", href: "/profile/auction-won", role: "bidder" },
   { title: "Auctions", href: "/profile/auctions", role: "auctioner" },
   { title: "Watch List", href: "/profile/watchlist", role: "bidder" },
   { title: "Wallet", href: "/profile/wallet" },
@@ -43,16 +46,18 @@ export default function ProfileComponent() {
       router.push("/profile/details");
       setRedirected(true);
     }
-  }, [pathname, user?.role, router]);
+  }, [pathname, user?.role, router, redirected]);
 
   return (
     <div className="">
       <div className="flex items-center gap-3">
         {user?.profilePicture ? (
-          <img
+          <Image
+            width={160}
+            height={160}
             src={user?.profilePicture}
             alt={user?.name}
-            className="rounded-full h-40 w-40"
+            className="rounded-full"
           />
         ) : (
           <>
@@ -60,7 +65,7 @@ export default function ProfileComponent() {
           </>
         )}
         <p className="text-3xl font-semibold">{user?.name}</p>
-        <ProfilePictureModal />
+        <EditProfileComponent />
       </div>
       <div className="my-10">
         <ul className="flex items-center gap-6">

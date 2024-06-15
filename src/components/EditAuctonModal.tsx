@@ -12,6 +12,7 @@ import toast, { Toaster } from "react-hot-toast";
 import Badge from "@mui/material/Badge";
 import CloseIcon from "@mui/icons-material/Close";
 import { axiosInstance } from "@/utils/constants";
+import Image from "next/image";
 
 const style = {
   position: "absolute" as "absolute",
@@ -25,18 +26,19 @@ const style = {
 };
 
 type FormValues = {
+  _id: string;
   itemName: string;
   basePrice: number;
-  startDate: Date;
-  endDate: Date;
+  startDate: string;
+  endDate: string;
   description: string;
-  images: File[];
+  images: string[];
   // password: string;
   // confirmPassword: string;
 };
 
 export default function EditAuctionModal({ id }: { id: string }) {
-  const [images, setImages] = useState<File[]>([]);
+  const [images, setImages] = useState<any[]>([]);
   const [open, setOpen] = useState(false);
   const [auction, setAuction] = useState<FormValues>();
   const handleOpen = () => setOpen(true);
@@ -55,9 +57,52 @@ export default function EditAuctionModal({ id }: { id: string }) {
   } = useForm<FormValues>();
   const { errors } = formState;
 
-  const addAuction = async (formValue: FormValues) => {
+  const editAuction = async (formValue: FormValues) => {
     try {
       setLoading(true);
+
+      const editedAuction = {
+        itemName: formValue.itemName,
+        basePrice: formValue.basePrice,
+        description: formValue.description,
+        startDate: formValue.startDate,
+        endDate: formValue.endDate,
+        images,
+      };
+
+      const response = await axiosInstance.put(
+        `/api/auction/edit-auction/${auction?._id}`,
+        editedAuction
+      );
+
+      if (response?.data?.success) {
+        setLoading(false);
+        toast.success("auction edited successfully");
+        handleClose();
+      } else {
+        setLoading(false);
+        toast.error("failed to add auction");
+      }
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+      toast.error("failed to edit auction");
+    }
+  };
+
+  const handleChange = async (
+    e: ChangeEvent<HTMLInputElement>,
+    index: number
+  ) => {
+    try {
+      const formValue = new FormData();
+
+      const files = e.target.files;
+      if (files) {
+        Array.from(files).forEach((file) => {
+          formValue.append("images[]", file);
+        });
+      }
 
       const { data } = await axios.post("/api/s3-upload", formValue, {
         headers: {
@@ -66,91 +111,83 @@ export default function EditAuctionModal({ id }: { id: string }) {
       });
 
       if (data.success) {
-        const auction = {
-          itemName: formValue.itemName,
-          basePrice: formValue.basePrice,
-          description: formValue.description,
-          startDate: formValue.startDate,
-          endDate: formValue.endDate,
-          images: data.uploadedImage,
-        };
+        if (auction?.images) {
+          console.log("before edit", images);
 
-        const response = await axiosInstance.post(
-          "/api/auction/add-auction",
-          auction
-        );
+          const img = [...auction?.images];
+          img[index] = data.uploadedImage[0];
+          console.log("image", img);
 
-        if (response?.data?.success) {
-          setLoading(false);
-          router.refresh();
-        } else {
-          setLoading(false);
-          toast.error("failed to add auction");
+          setImages(img);
+          console.log(images);
+          console.log("after edit");
         }
       }
     } catch (error) {
       console.log(error);
-      setLoading(false);
-      toast.error("failed to add auction");
     }
-  };
-  const handleDelete = async (image: any) => {
-    const filteredImage = images.filter((img) => img !== image);
-    setImages(filteredImage);
 
-    const transferData = new DataTransfer();
+    // try {
+    //   const file = e.target.files;
+    //   if (file) {
+    //     console.log(file[0], index);
+    //     setImages((prev) => prev.filter((p) => p.index !== index));
+    //     const image = {
+    //       index,
+    //       file: file[0],
+    //     };
+    //     setImages((prev) => [...prev, image]);
 
-    filteredImage.forEach((img) => transferData.items.add(img));
-    (document.getElementById("image") as HTMLInputElement).files =
-      transferData.files;
-  };
+    //     for (let img of images) {
+    //       console.log("sadsssssssssssssssss",img.file);
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-    if (files && files.length > 3) {
-      setError("images", {
-        type: "max",
-        message: "only three image should be uploaded",
-      });
-    } else if (files) {
-      clearErrors("images");
-      setImages(Array.from(files));
-      console.log(images);
-    }
-  };
+    //       let image = document.getElementById(`image${img.index}`);
+    //       console.log(image);
 
-  const getAuction = async () => {
-    try {
-      const { data } = await axiosInstance.get(
-        `/api/auction/get-single-auction/${id}`
-      );
+    //       if(image){
 
-      if (data?.success) {
-        setAuction(data.auction);
-      }
-    } catch (error) {
-      console.log(error);
-    }
+    //         image?.setAttribute("src", URL.createObjectURL(img.file));
+    //         }
+    //     }
+    //   }
+    // } catch (error) {
+    //   console.log(error);
+    // }
   };
 
   useEffect(() => {
+    const getAuction = async () => {
+      try {
+        const { data } = await axiosInstance.get(
+          `/api/auction/get-single-auction/${id}`
+        );
+
+        if (data?.success) {
+          setAuction(data.auction);
+          setImages(data?.auction?.images);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
     getAuction();
-  }, []);
+  }, [id]);
 
   useEffect(() => {
     if (auction) {
       setValue("itemName", auction?.itemName);
       setValue("basePrice", auction?.basePrice);
       setValue("description", auction?.description);
-      setValue("startDate", auction?.startDate);
-      setValue("endDate", auction?.endDate);
+      setValue("startDate", auction.startDate.split("T")[0]);
+      setValue("endDate", auction.endDate.split("T")[0]);
     }
-  }, [auction]);
+  }, [auction, setValue]);
 
   return (
     <div>
       <div>
-        <Toaster />
+        {/* <Toaster /> */}
         <Button
           onClick={handleOpen}
           className="bg-[#231656] text-white py-2 px-4 rounded-md font-semibold hover:bg-[#201744]"
@@ -168,7 +205,7 @@ export default function EditAuctionModal({ id }: { id: string }) {
               <div>
                 <form
                   className=""
-                  onSubmit={handleSubmit(addAuction)}
+                  onSubmit={handleSubmit(editAuction)}
                   noValidate
                 >
                   <h1 className="text-3xl font-semibold text-gray-500 my-10">
@@ -252,7 +289,6 @@ export default function EditAuctionModal({ id }: { id: string }) {
                               return true;
                             },
                           })}
-                          defaultValue={auction?.startDate?.toLocaleString().split('T')[0]}
                         />
                         <span className="text-red-600">
                           {errors.startDate?.message}
@@ -280,7 +316,6 @@ export default function EditAuctionModal({ id }: { id: string }) {
                               return true;
                             },
                           })}
-                          defaultValue={auction?.endDate?.toLocaleString().split('T')[0]}
                         />
                         <span className="text-red-600">
                           {errors.endDate?.message}
@@ -288,7 +323,7 @@ export default function EditAuctionModal({ id }: { id: string }) {
                       </div>
                     </div>
                     <div>
-                      <div className="my-3">
+                      {/* <div className="my-3">
                         <label htmlFor="image" className="text-gray-500">
                           End Date
                         </label>
@@ -300,7 +335,6 @@ export default function EditAuctionModal({ id }: { id: string }) {
                           accept="image/*"
                           multiple
                           {...register("images", {
-                            required: "Please upload three images",
                             validate: {
                               exactlyThreeFiles: (files) =>
                                 files.length === 3 ||
@@ -312,22 +346,48 @@ export default function EditAuctionModal({ id }: { id: string }) {
                         <span className="text-red-600">
                           {errors.images?.message}
                         </span>
-                      </div>
-                      <div className=" p-6 flex flex-wrap gap-5 shadow-md">
-                        {images.map((image, i) => (
+                      </div> */}
+                      <div className=" px-6 shadow-md">
+                        {images.map((auct, i) => (
+                          <div key={i}>
+                            <Image
+                              height={150}
+                              width={200}
+                              src={auct}
+                              alt={auct}
+                              id={`image${i}`}
+                            />
+                            <input
+                              type="file"
+                              accept="image/*"
+                              onChange={(e) => handleChange(e, i)}
+                            />
+                          </div>
+                        ))}
+                        {/* {auction?.images?.map((image, i) => (
                           <Badge
                             key={i}
                             badgeContent={<CloseIcon />}
                             color="error"
                           >
-                            <img
+                            <Image
+                              width={180}
+                              height={125}
                               onClick={() => handleDelete(image)}
-                              className="h-32 w-44 my-3 shadow-lg "
-                              src={URL.createObjectURL(image)}
-                              alt={image.name}
+                              className=" my-3 shadow-lg "
+                              src={image}
+                              alt={image}
                             />
                           </Badge>
-                        ))}
+                        ))} */}
+                      </div>
+                      <div className="my-3 ">
+                        {/* {auction?.images.map((auct) => (
+                          <>
+                            <input type="file" accept="image/*" />
+                            <Image height={150} width={200} src={auct} alt={auct}/>
+                          </>
+                        ))} */}
                       </div>
                     </div>
                   </div>

@@ -10,9 +10,7 @@ export default function Login() {
     <div className="lg:mx-96 md:shadow-lg flex justify-center items-center min-h-[91vh]">
       <div>
         <LoginForm />
-        <p className="text-center text-blue-600 my-3">
-          <Link href="/forgot-password">Forgot password?</Link>
-        </p>
+        <h1 className="text-center text-blue-600 my-3">Forgot password?</h1>
         <GoogleSigninButton />
 
         <Link href="/signup">

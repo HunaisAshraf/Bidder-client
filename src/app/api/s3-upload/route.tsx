@@ -19,7 +19,7 @@ async function uploadToS3(file: any, fileName: any) {
       Bucket: process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME,
       Key: `${fileName}-${Date.now()}`,
       Body: buffer,
-      ContentType: file.type,
+      ContentType: "image/*",
     };
 
     const command = new PutObjectCommand(params);
