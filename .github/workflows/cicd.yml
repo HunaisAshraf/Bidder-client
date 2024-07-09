@@ -27,7 +27,7 @@ jobs:
       - name: Stop existing container
         run: docker stop hunais/bidder-frontend || true
       - name: Deleting existing container
-        run: docker rm bidder-backend || true
+        run: docker rm bidder-frontend || true
       - name: Run docker container
         run: |
           docker run -d -p 3000:3000 --name bidder-frontend \
