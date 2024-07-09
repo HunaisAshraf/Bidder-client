@@ -12,15 +12,16 @@ const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    setUser: (state, action) => {
+    setUser: (state, auction) => {
       state.user = {
-        id: action.payload._id,
-        email: action.payload.email,
-        name: action.payload.name,
-        phone: action.payload.phone,
-        profilePicture: action.payload.profilePicture,
-        role: action.payload.role,
-        token: action.payload.token,
+        _id: auction.payload._id,
+        email: auction.payload.email,
+        name: auction.payload.name,
+        phone: auction.payload.phone,
+        profilePicture: auction.payload.profilePicture,
+        role: auction.payload.role,
+        token: auction.payload.token,
+        isActive: auction.payload.isActive,
       };
     },
     logout: (state) => {

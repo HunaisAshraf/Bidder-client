@@ -46,7 +46,7 @@ export default function Wallet() {
   }, []);
 
   return (
-    <div className="flex justify-center gap-3">
+    <div className="md:flex justify-center gap-3">
       <div>
         <div className="p-5 shadow-sm shadow-gray-400 rounded-md w-[400px]">
           <div>
@@ -67,7 +67,7 @@ export default function Wallet() {
                 <div className="text-center">
                   <p className="text-gray-600 text-xs">Usable Amount</p>
                   <h1 className="text-md my-1 font-semibold text-green-800">
-                    $ {wallet ? (wallet.balance - wallet?.amountUsed) : "0"}
+                    $ {wallet ? wallet.balance - wallet?.amountUsed : "0"}
                   </h1>
                 </div>
               </div>

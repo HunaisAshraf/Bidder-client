@@ -37,7 +37,15 @@ type FormValues = {
   // confirmPassword: string;
 };
 
-export default function EditAuctionModal({ id }: { id: string }) {
+export default function EditAuctionModal({
+  id,
+  change,
+  setChange,
+}: {
+  id: string;
+  change: boolean;
+  setChange: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
   const [images, setImages] = useState<any[]>([]);
   const [open, setOpen] = useState(false);
   const [auction, setAuction] = useState<FormValues>();
@@ -78,6 +86,7 @@ export default function EditAuctionModal({ id }: { id: string }) {
       if (response?.data?.success) {
         setLoading(false);
         toast.success("auction edited successfully");
+        setChange(!change);
         handleClose();
       } else {
         setLoading(false);
@@ -283,6 +292,7 @@ export default function EditAuctionModal({ id }: { id: string }) {
                             required: "enter the startDate",
                             validate: (value) => {
                               const today = new Date();
+                              today.setHours(today.getHours() - 24);
                               if (today && new Date(value) < today) {
                                 return "End date must be after current date";
                               }

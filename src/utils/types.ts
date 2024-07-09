@@ -1,16 +1,36 @@
 export type ReactSetState = React.Dispatch<React.SetStateAction<string>>;
 
 export type User = {
-  id: string;
+  _id: string;
   name: string;
   email: string;
   phone?: string;
   profilePicture?: string;
   token: string;
   role: string;
+  isActive: boolean;
 };
 
 export type AuthData = {
   user?: User | null;
   //   admin?: User | null;
+};
+
+export type AdminAuthData = {
+  admin?: User | null;
+};
+
+export type Auction = {
+  _id: string;
+  itemName: string;
+  basePrice: number;
+  description: string;
+  startDate: Date;
+  endDate: Date;
+  images: string[];
+  completed: boolean;
+  isListed: boolean;
+  isVerified: string;
+  auctioner: User;
+  isBlocked: boolean;
 };

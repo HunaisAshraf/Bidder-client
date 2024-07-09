@@ -12,19 +12,15 @@ import { setUser } from "@/lib/store/features/userSlice";
 export default function Role() {
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const user = useAppSelector(state=>state.users.user)
+  const user = useAppSelector((state) => state.users.user);
 
   const handleUpdateRole = async (role: string) => {
     try {
-
-
       console.log(localStorage.getItem("token"));
-      
-      const { data } = await axiosInstance.put(
-        `/api/auth/update-user/${user?.id}`,
-        { role },
 
-      );
+      const { data } = await axiosInstance.put(`/api/auth/update-user`, {
+        role,
+      });
       console.log(data);
       if (data.success) {
         const user = {

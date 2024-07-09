@@ -64,7 +64,7 @@ export default function EditProfileComponent() {
       let image;
       console.log("kjsdanfkjsdf", formValue);
 
-      if (formValue.images) {
+      if (formValue.images && formValue.images.length > 0) {
         const { data } = await axios.post("/api/s3-upload", formValue, {
           headers: {
             "Content-Type": "multipart/form-data",
@@ -87,7 +87,7 @@ export default function EditProfileComponent() {
       console.log(updateuser);
 
       const { data } = await axiosInstance.put(
-        `/api/auth/update-user/${user?.id}`,
+        `/api/auth/update-user`,
         updateuser
       );
 
@@ -117,7 +117,7 @@ export default function EditProfileComponent() {
     setValue("name", user?.name);
     setValue("phone", user?.phone);
     setValue("email", user?.email);
-  }, [user,setValue]);
+  }, [user, setValue]);
 
   return (
     <div>
@@ -145,13 +145,18 @@ export default function EditProfileComponent() {
                   </h1>
 
                   <div>
-                    {img && <Image src={URL.createObjectURL(img)} alt="" />}
+                    {img && (
+                      <Image
+                        width={300}
+                        height={300}
+                        src={URL.createObjectURL(img)}
+                        alt=""
+                      />
+                    )}
                     <input
                       type="file"
                       accept="image/*"
-                      {...register("images", {
-                        required: "Please enter name",
-                      })}
+                      {...register("images")}
                       onChange={handleChange}
                     />
                   </div>

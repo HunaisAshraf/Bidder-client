@@ -10,7 +10,9 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import Input from "../Input";
 import Spinner from "../Spinner";
-import toast,{Toaster} from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
+import { useDispatch } from "react-redux";
+import { setUser } from "@/lib/store/features/userSlice";
 
 type FormValues = {
   name: string;
@@ -26,6 +28,8 @@ export default function SignupForm() {
     useForm<FormValues>();
   const { errors } = formState;
 
+  const dispatch = useDispatch();
+
   const router = useRouter();
 
   const handleSignup = async (formData: FormValues) => {
@@ -37,7 +41,7 @@ export default function SignupForm() {
 
       if (data?.success) {
         const user = {
-          id: data?.user?._id,
+          _id: data?.user?._id,
           name: data?.user?.name,
           email: data?.user?.email,
           phone: data?.user?.phone,
@@ -45,14 +49,16 @@ export default function SignupForm() {
         };
         localStorage.setItem("auth", JSON.stringify(user));
         localStorage.setItem("token", JSON.stringify(data?.token));
+        dispatch(setUser(user));
 
         setLoading(false);
+
         router.replace("/role");
       }
     } catch (error) {
       console.log(error);
       setLoading(false);
-      toast.error("failed to signup")
+      toast.error("failed to signup");
     }
   };
   return (

@@ -35,7 +35,6 @@ export default function LoginForm() {
       const { data } = await axiosInstance.post("/api/auth/login", formData);
 
       if (data?.success) {
-       
         localStorage.setItem("auth", JSON.stringify(data.user));
         localStorage.setItem("token", JSON.stringify(data?.token));
 

@@ -65,17 +65,19 @@ export default async function BiddingHistory() {
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
                   <TableCell component="th" scope="auction">
-                    {bid?.auctionId.itemName}
+                    {bid?.auctionId?.itemName}
                   </TableCell>
                   <TableCell align="right">
                     <Image
                       width={96}
                       height={96}
-                      src={bid.auctionId.images[0]}
-                      alt={bid.auctionId.itemName}
+                      src={bid.auctionId?.images[0]}
+                      alt={bid.auctionId?.itemName}
                     />
                   </TableCell>
-                  <TableCell align="right">{bid.auctionId.basePrice}</TableCell>
+                  <TableCell align="right">
+                    {bid.auctionId?.basePrice}
+                  </TableCell>
                   <TableCell align="right">{bid.bidAmount}</TableCell>
                   <TableCell align="right">
                     {moment(bid?.bidTime).format("lll")}

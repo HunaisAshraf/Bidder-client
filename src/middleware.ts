@@ -1,11 +1,18 @@
 import { NextResponse, NextRequest } from "next/server";
 
 const protectedRouteRegex = /^\/profile\/.*$/;
-const protectedRoute = ["/profile", "/watchlist"];
-const authRoute = ["/login", "/signup","/update-password","/forgot-password"];
+const protectedRoute = ["/profile", "/watchlist", "/chat"];
+const authRoute = ["/login", "/signup", "/update-password", "/forgot-password"];
+const adminRoute = ["/admin/dashboard", "/admin/users", "/admin/auctions"];
 
 export function middleware(req: NextRequest) {
+  const requestHeaders = new Headers(req.headers);
+  const url = new URL(req.url).pathname;
+  requestHeaders.set("x-url", url);
+
   const token = req.cookies.get("token")?.value;
+
+  const adminToken = req.cookies.get("admin_token")?.value;
 
   const currentRoute = req.nextUrl.pathname;
 
@@ -19,6 +26,17 @@ export function middleware(req: NextRequest) {
     response.cookies.set("previousRoute", currentRoute);
   }
 
+  if (!adminToken && adminRoute.includes(currentRoute)) {
+    const absoluteUrl = new URL("/admin", req.nextUrl.origin);
+
+    return NextResponse.redirect(absoluteUrl.toString());
+  }
+
+  if (adminToken && currentRoute === "/admin") {
+    const absoluteUrl = new URL("/admin/dashboard", req.nextUrl.origin);
+    return NextResponse.redirect(absoluteUrl.toString());
+  }
+
   if (
     !token &&
     (protectedRoute.includes(currentRoute) ||
@@ -29,6 +47,7 @@ export function middleware(req: NextRequest) {
 
     return NextResponse.redirect(absoluteUrl.toString());
   }
+
   if (token && authRoute.includes(currentRoute)) {
     const absoluteUrl = new URL(
       previousRoute ? previousRoute : "/",
@@ -37,5 +56,10 @@ export function middleware(req: NextRequest) {
 
     return NextResponse.redirect(absoluteUrl.toString());
   }
-  return response;
+
+  return NextResponse.next({
+    request: {
+      headers: requestHeaders,
+    },
+  });
 }

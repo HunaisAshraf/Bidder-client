@@ -7,7 +7,7 @@ export default function ProfileLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="mx-12 md:mx-36">
+    <div className="mx-3 md:mx-36">
       <ProfileComponent />
       <div>{children}</div>
     </div>

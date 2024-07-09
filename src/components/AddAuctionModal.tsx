@@ -234,6 +234,7 @@ export default function AddAuctionModal({
                             required: "enter the startDate",
                             validate: (value) => {
                               const today = new Date();
+                              today.setHours(today.getHours() - 24);
                               if (today && new Date(value) < today) {
                                 return "End date must be after current date";
                               }
@@ -306,9 +307,10 @@ export default function AddAuctionModal({
                             badgeContent={<CloseIcon />}
                             color="error"
                           >
-                            <Image onClick={() => handleDelete(image)}
-                            width={180}
-                            height={128}
+                            <Image
+                              onClick={() => handleDelete(image)}
+                              width={180}
+                              height={128}
                               className="h-32 w-44 my-3 shadow-lg "
                               src={URL.createObjectURL(image)}
                               alt={image.name}
