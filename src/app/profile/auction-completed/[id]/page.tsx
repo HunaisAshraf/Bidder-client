@@ -5,7 +5,7 @@ import Image from "next/image";
 import React from "react";
 import { DownloadTableExcel } from "react-export-table-to-excel";
 
-export const getData = async (id: string) => {
+const getData = async (id: string) => {
   try {
     const token = cookies().get("token");
     const headers = {
