@@ -25,7 +25,7 @@ jobs:
       - name: Pulling image
         run: docker pull hunais/bidder-frontend:latest
       - name: Stop existing container
-        run: docker stop hunais/bidder-frontend || true
+        run: docker stop bidder-frontend || true
       - name: Deleting existing container
         run: docker rm bidder-frontend || true
       - name: Run docker container
