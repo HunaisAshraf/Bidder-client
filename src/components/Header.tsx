@@ -53,6 +53,8 @@ export default function Header() {
 
   const dispatch = useAppDispatch();
 
+  console.log(process.env.NEXT_PUBLIC_SERVER_HOST);
+
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
