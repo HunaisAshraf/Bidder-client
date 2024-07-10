@@ -31,9 +31,9 @@ const ChartComponent = () => {
   useEffect(() => {
     const getData = async () => {
       try {
-        const user = adminAxiosInstance.get("/api/auth/dashboard-user");
+        const user = adminAxiosInstance.get("/api/v1/auth/dashboard-user");
         const auctions = adminAxiosInstance.get(
-          "/api/auction/dashboard-auction"
+          "/api/v1/auction/dashboard-auction"
         );
 
         const [userData, auctionsData] = await Promise.all([user, auctions]);

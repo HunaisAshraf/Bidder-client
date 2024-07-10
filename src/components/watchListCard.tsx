@@ -51,7 +51,7 @@ const WatchListCard = ({ auction, id, setChange }: AuctionProps) => {
   const removeFromWatchList = async (id: string) => {
     try {
       const { data } = await axiosInstance.delete(
-        `/api/watchlist/delete-watchlist/${id}`
+        `/api/v1/watchlist/delete-watchlist/${id}`
       );
 
       if (data.success) {

@@ -24,7 +24,7 @@ async function getData() {
     let auctions;
 
     let { data } = await axios.get(
-      `${process.env.NEXT_PUBLIC_SERVER_HOST}/api/auction/auction-won`,
+      `${process.env.NEXT_PUBLIC_SERVER_HOST}/api/v1/auction/auction-won`,
       {
         headers: {
           Authorization: `Bearer ${token?.value}`,

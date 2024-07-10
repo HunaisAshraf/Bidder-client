@@ -17,7 +17,7 @@ export default function PaymentProcessing({
     const addPayment = async () => {
       try {
         const { data } = await axiosInstance.post(
-          "/api/payments/add-to-wallet",
+          "/api/v1/payments/add-to-wallet",
           {
             paymentIntent: searchParams.payment_intent,
           }

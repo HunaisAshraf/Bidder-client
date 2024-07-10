@@ -90,7 +90,7 @@ export default function AddAuctionModal({
         };
 
         const response = await axiosInstance.post(
-          "/api/auction/add-auction",
+          "/api/v1/auction/add-auction",
           auction
         );
 

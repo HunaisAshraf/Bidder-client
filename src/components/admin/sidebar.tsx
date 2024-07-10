@@ -38,7 +38,7 @@ export default function SideBar() {
 
   const handleLogout = async () => {
     try {
-      await axiosInstance.get("/api/auth/admin-logout");
+      await axiosInstance.get("/api/v1/auth/admin-logout");
 
       dispatch(adminLogout());
 

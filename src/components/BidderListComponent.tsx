@@ -48,7 +48,7 @@ export default function BidderListComponent({
     const getBids = async () => {
       try {
         const { data } = await axiosInstance.get(
-          `/api/auction/get-bids/${auctionId}`
+          `/api/v1/auction/get-bids/${auctionId}`
         );
 
         if (data.success) {

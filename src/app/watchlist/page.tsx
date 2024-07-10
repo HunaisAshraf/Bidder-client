@@ -11,7 +11,7 @@ import React, { useEffect, useState } from "react";
 //     const token = cookies().get("token");
 
 //     const { data } = await axios.get(
-//       `${process.env.NEXT_PUBLIC_SERVER_HOST}/api/watchlist/get-watchlist`,
+//       `${process.env.NEXT_PUBLIC_SERVER_HOST}/api/v1/watchlist/get-watchlist`,
 //       {
 //         headers: {
 //           Authorization: `Bearer ${token?.value}`,
@@ -32,7 +32,9 @@ export default function WatchList() {
   const [change, setChange] = useState(false);
   useEffect(() => {
     const getData = async () => {
-      const { data } = await axiosInstance.get("/api/watchlist/get-watchlist");
+      const { data } = await axiosInstance.get(
+        "/api/v1/watchlist/get-watchlist"
+      );
       if (data.success) {
         console.log(data);
 

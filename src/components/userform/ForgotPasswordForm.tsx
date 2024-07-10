@@ -24,7 +24,7 @@ export default function ForgotPasswordForm() {
       console.log(formData);
 
       const { data } = await axiosInstance.post(
-        "/api/auth/forgotpassword",
+        "/api/v1/auth/forgotpassword",
         formData
       );
 

@@ -28,7 +28,7 @@ export default function AdminLoginForm() {
     try {
       setLoading(true);
       const { data } = await axiosInstance.post(
-        "/api/auth/admin-login",
+        "/api/v1/auth/admin-login",
         formData
       );
 

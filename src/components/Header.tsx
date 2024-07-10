@@ -72,7 +72,7 @@ export default function Header() {
 
   const handleLogout = async () => {
     try {
-      const { data } = await axiosInstance.get("/api/auth/logout");
+      const { data } = await axiosInstance.get("/api/v1/auth/logout");
       localStorage.removeItem("auth");
       localStorage.removeItem("token");
       await signOut();
@@ -85,7 +85,7 @@ export default function Header() {
 
   const handleNotification = async (chatId: string, sender: any) => {
     try {
-      await axiosInstance.put(`/api/notification/read-message/${sender}`);
+      await axiosInstance.put(`/api/v1/notification/read-message/${sender}`);
 
       dispatch(selectChat(chatId));
       setnotificationCount(0);
@@ -114,7 +114,7 @@ export default function Header() {
   useEffect(() => {
     async function verifyToken() {
       try {
-        let { data } = await axiosInstance.get("/api/auth/verify-token");
+        let { data } = await axiosInstance.get("/api/v1/auth/verify-token");
         if (!data.success) {
           handleLogout();
         }
@@ -159,7 +159,7 @@ export default function Header() {
     const getNotifications = async () => {
       try {
         const { data } = await axiosInstance.get(
-          "/api/notification/get-notification"
+          "/api/v1/notification/get-notification"
         );
         if (data.success) {
           console.log(data.notifications);

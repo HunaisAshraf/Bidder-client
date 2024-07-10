@@ -18,7 +18,7 @@ export default function Role() {
     try {
       console.log(localStorage.getItem("token"));
 
-      const { data } = await axiosInstance.put(`/api/auth/update-user`, {
+      const { data } = await axiosInstance.put(`/api/v1/auth/update-user`, {
         role,
       });
       console.log(data);

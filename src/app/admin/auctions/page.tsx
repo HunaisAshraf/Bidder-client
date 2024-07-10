@@ -29,7 +29,7 @@ export default function Auctions() {
   const filterAuctions = async () => {
     try {
       const { data } = await adminAxiosInstance.get(
-        `/api/auction/filter-auction/?filter=${filter}&page=${page}`
+        `/api/v1/auction/filter-auction/?filter=${filter}&page=${page}`
       );
       if (data.success) {
         console.log(data);
@@ -45,7 +45,7 @@ export default function Auctions() {
   const verifyAuction = async (id: string) => {
     try {
       const { data } = await adminAxiosInstance.put(
-        `/api/auction/verify-auction/${id}`
+        `/api/v1/auction/verify-auction/${id}`
       );
 
       if (data.success) {
@@ -62,7 +62,7 @@ export default function Auctions() {
       console.log("aldksfjkl");
 
       const { data } = await adminAxiosInstance.put(
-        `/api/auction/block-auction/${id}`
+        `/api/v1/auction/block-auction/${id}`
       );
 
       if (data.success) {
@@ -78,7 +78,7 @@ export default function Auctions() {
     try {
       e.preventDefault();
       const { data } = await adminAxiosInstance.get(
-        `/api/auction/search-auction/?search=${search}`
+        `/api/v1/auction/search-auction/?search=${search}`
       );
 
       if (data.success) {
@@ -94,7 +94,7 @@ export default function Auctions() {
     const getAuctions = async () => {
       try {
         const { data } = await adminAxiosInstance.get(
-          `/api/auction/admin-get-auction/?page=${page}`
+          `/api/v1/auction/admin-get-auction/?page=${page}`
         );
         if (data.success) {
           console.log(data.auctions);

@@ -48,7 +48,7 @@ export default function SingleAuction({
 
   const handleBid = async () => {
     try {
-      const { data } = await axiosInstance.post("/api/auction/place-bid", {
+      const { data } = await axiosInstance.post("/api/v1/auction/place-bid", {
         bidAmount,
         auctionId,
       });
@@ -71,7 +71,7 @@ export default function SingleAuction({
 
   const handleChat = async () => {
     try {
-      const { data } = await axiosInstance.post("/api/chat/add-chat", {
+      const { data } = await axiosInstance.post("/api/v1/chat/add-chat", {
         secondUser: auction?.auctioner,
       });
       if (data.success) {
@@ -87,7 +87,7 @@ export default function SingleAuction({
   const addToWatchList = async (id: string) => {
     try {
       const { data } = await axiosInstance.post(
-        `/api/watchlist/add-watchlist/${id}`
+        `/api/v1/watchlist/add-watchlist/${id}`
       );
 
       if (data.success) {
@@ -103,7 +103,7 @@ export default function SingleAuction({
   const removeFromWatchList = async (id: string) => {
     try {
       const { data } = await axiosInstance.delete(
-        `/api/watchlist/delete-watchlist/${id}`
+        `/api/v1/watchlist/delete-watchlist/${id}`
       );
 
       if (data.success) {
@@ -125,7 +125,7 @@ export default function SingleAuction({
     const getAuction = async () => {
       try {
         const { data } = await axiosInstance.get(
-          `${process.env.NEXT_PUBLIC_SERVER_HOST}/api/auction/get-single-auction/${auctionId}`
+          `${process.env.NEXT_PUBLIC_SERVER_HOST}/api/v1/auction/get-single-auction/${auctionId}`
         );
 
         if (data?.success) {
@@ -144,7 +144,7 @@ export default function SingleAuction({
     const getWatchList = async () => {
       try {
         const { data } = await axiosInstance.get(
-          `/api/watchList/check-watchlist/${params.id}`
+          `/api/v1/watchList/check-watchlist/${params.id}`
         );
 
         if (data.success) {

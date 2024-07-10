@@ -11,7 +11,7 @@ export const useAuth = () => {
 
   async function handleLogout() {
     try {
-      await axiosInstance.get("/api/auth/logout");
+      await axiosInstance.get("/api/v1/auth/logout");
     } catch (error) {
       console.log(error);
     }
@@ -21,7 +21,7 @@ export const useAuth = () => {
   //   try {
   //     console.log(token);
 
-  //     let { data } = await axiosInstance.get("/api/auth/verify-token", {
+  //     let { data } = await axiosInstance.get("/api/v1/auth/verify-token", {
   //       headers: {
   //         Authorization: `Bearer ${token}`,
   //       },

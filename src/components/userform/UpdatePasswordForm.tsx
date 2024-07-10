@@ -32,7 +32,7 @@ export default function UpdatePasswordForm() {
 
       console.log(formData);
 
-      const { data } = await axiosInstance.put("/api/auth/update-password", {
+      const { data } = await axiosInstance.put("/api/v1/auth/update-password", {
         password: formData.password,
         email,
       });

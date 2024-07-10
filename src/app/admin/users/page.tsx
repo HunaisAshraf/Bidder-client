@@ -28,7 +28,7 @@ export default function Users() {
   const filterUser = async () => {
     try {
       const { data } = await adminAxiosInstance.get(
-        `/api/auth/filter-users/?filter=${filter}&page=${page}`
+        `/api/v1/auth/filter-users/?filter=${filter}&page=${page}`
       );
       if (data.success) {
         console.log(data);
@@ -44,7 +44,7 @@ export default function Users() {
   const handleStatus = async (id: string) => {
     try {
       const { data } = await adminAxiosInstance.put(
-        `/api/auth/change-user-status/${id}`
+        `/api/v1/auth/change-user-status/${id}`
       );
 
       if (data.success) {
@@ -60,7 +60,7 @@ export default function Users() {
     try {
       e.preventDefault();
       const { data } = await adminAxiosInstance(
-        `/api/auth/search-users/?search=${search}`
+        `/api/v1/auth/search-users/?search=${search}`
       );
       if (data.success) {
         setUsers(data.users);
@@ -77,7 +77,7 @@ export default function Users() {
 
       try {
         const { data } = await adminAxiosInstance.get(
-          `/api/auth/get-all-users/?page=${page}`
+          `/api/v1/auth/get-all-users/?page=${page}`
         );
         if (data.success) {
           console.log(data.users);

@@ -15,11 +15,11 @@ const getData = async (id: string) => {
     };
 
     const bids = axios.get(
-      `${process.env.NEXT_PUBLIC_SERVER_HOST}/api/auction/get-bids/${id}`,
+      `${process.env.NEXT_PUBLIC_SERVER_HOST}/api/v1/auction/get-bids/${id}`,
       headers
     );
     const auction = axios.get(
-      `${process.env.NEXT_PUBLIC_SERVER_HOST}/api/auction/auction-won/${id}`,
+      `${process.env.NEXT_PUBLIC_SERVER_HOST}/api/v1/auction/auction-won/${id}`,
       headers
     );
 

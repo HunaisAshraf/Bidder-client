@@ -31,7 +31,7 @@ export default async function BiddingHistory() {
   let bids: Bid[] | null = null;
 
   const { data } = await axios.get(
-    `${process.env.NEXT_PUBLIC_SERVER_HOST}/api/auction/bidding-history`,
+    `${process.env.NEXT_PUBLIC_SERVER_HOST}/api/v1/auction/bidding-history`,
     {
       headers: {
         Authorization: `Bearer ${token?.value}`,

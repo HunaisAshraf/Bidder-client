@@ -18,7 +18,7 @@ function Verify() {
     async function verify() {
       try {
         setVerifying(true);
-        const { data } = await axiosInstance.post("/api/auth/verify-email", {
+        const { data } = await axiosInstance.post("/api/v1/auth/verify-email", {
           type,
           token,
           email,

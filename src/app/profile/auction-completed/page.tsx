@@ -6,7 +6,7 @@ import React from "react";
 async function getData() {
   const token = cookies().get("token");
   const { data } = await axios.get(
-    `${process.env.NEXT_PUBLIC_SERVER_HOST}/api/auction/completed-auction`,
+    `${process.env.NEXT_PUBLIC_SERVER_HOST}/api/v1/auction/completed-auction`,
     {
       headers: {
         Authorization: `Bearer ${token?.value}`,

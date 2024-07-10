@@ -79,7 +79,7 @@ export default function EditAuctionModal({
       };
 
       const response = await axiosInstance.put(
-        `/api/auction/edit-auction/${auction?._id}`,
+        `/api/v1/auction/edit-auction/${auction?._id}`,
         editedAuction
       );
 
@@ -168,7 +168,7 @@ export default function EditAuctionModal({
     const getAuction = async () => {
       try {
         const { data } = await axiosInstance.get(
-          `/api/auction/get-single-auction/${id}`
+          `/api/v1/auction/get-single-auction/${id}`
         );
 
         if (data?.success) {

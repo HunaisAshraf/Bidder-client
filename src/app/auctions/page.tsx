@@ -41,7 +41,7 @@ export default function Auction() {
     const getData = async () => {
       try {
         const { data } = await axios.get(
-          `${process.env.NEXT_PUBLIC_SERVER_HOST}/api/auction/get-all-auctions`
+          `${process.env.NEXT_PUBLIC_SERVER_HOST}/api/v1/auction/get-all-auctions`
         );
         if (data.success) {
           setAuctions(data.auctions);

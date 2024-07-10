@@ -38,7 +38,7 @@ export default function AuctionTable() {
   const handleChangeStatus = async (id: string) => {
     try {
       const { data } = await axiosInstance.put(
-        `/api/auction/auction-status/${id}`
+        `/api/v1/auction/auction-status/${id}`
       );
       if (data.success) {
         toast.success("status changed successfully");
@@ -53,7 +53,9 @@ export default function AuctionTable() {
   React.useEffect(() => {
     const getAuctions = async () => {
       try {
-        const { data } = await axiosInstance.get("/api/auction/get-auctions");
+        const { data } = await axiosInstance.get(
+          "/api/v1/auction/get-auctions"
+        );
 
         console.log(data);
         if (data.success) {

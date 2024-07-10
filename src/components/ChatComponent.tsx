@@ -87,7 +87,7 @@ export default function ChatComponent() {
         }
       }
       const { data } = await axiosInstance.post(
-        `/api/chat/add-message/${chat}`,
+        `/api/v1/chat/add-message/${chat}`,
         { message: newMessage, image: newImg }
       );
       if (data.success) {
@@ -98,7 +98,7 @@ export default function ChatComponent() {
         socket?.emit("send_message", { newMessage, newImg, chat });
 
         const response = await axiosInstance.post(
-          `/api/notification/add-notificaion/${selectedUser?._id}`,
+          `/api/v1/notification/add-notificaion/${selectedUser?._id}`,
           { message: newMessage, chatId: chat }
         );
 
@@ -144,7 +144,7 @@ export default function ChatComponent() {
     const getMessages = async () => {
       try {
         const { data } = await axiosInstance.get(
-          `/api/chat/get-messages/${chat}`
+          `/api/v1/chat/get-messages/${chat}`
         );
         if (data.success) {
           setMessages(data.data);

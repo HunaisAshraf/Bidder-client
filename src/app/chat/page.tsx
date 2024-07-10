@@ -7,7 +7,7 @@ async function getChat() {
   try {
     const token = cookies().get("token");
     const { data } = await axios.get(
-      `${process.env.NEXT_PUBLIC_SERVER_HOST}/api/chat/get-chat`,
+      `${process.env.NEXT_PUBLIC_SERVER_HOST}/api/v1/chat/get-chat`,
       {
         headers: {
           Authorization: `Bearer ${token?.value}`,

@@ -21,15 +21,6 @@ const authOptions: NextAuthOptions = {
           profilePicture: user.image,
         };
 
-        // let { data } = await axios.post(
-        //   `${process.env.BACKEND_URL}/api/auth/google-signup`,
-        //   userData
-        // );
-
-        // if (data.success) {
-        //   return true;
-        // }
-
         if (user) {
           console.log(true);
           return true;
