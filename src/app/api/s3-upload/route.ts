@@ -32,7 +32,7 @@ async function uploadToS3(file: any, fileName: any) {
     console.log("params ", params);
     const command = new PutObjectCommand(params);
 
-    console.log("s3 client ", s3Client);
+    console.log("s3 client ", command);
 
     const url = await getSignedUrl(s3Client, command, { expiresIn: 3600 });
 
