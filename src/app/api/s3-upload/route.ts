@@ -15,6 +15,8 @@ async function uploadToS3(file: any, fileName: any) {
   try {
     const buffer = Buffer.from(await file.arrayBuffer());
 
+    console.log(process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME);
+
     const params = {
       Bucket: process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME,
       Key: `${fileName}-${Date.now()}`,
