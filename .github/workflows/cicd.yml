@@ -23,6 +23,7 @@ jobs:
             --build-arg NEXT_PUBLIC_AWS_S3_REGION="${{ secrets.NEXT_PUBLIC_AWS_S3_REGION }}" \
             --build-arg NEXT_PUBLIC_AWS_S3_ACCESS_KEY_ID="${{ secrets.NEXT_PUBLIC_AWS_S3_ACCESS_KEY_ID }}" \
             --build-arg NEXT_PUBLIC_AWS_S3_SECRET_KEY="${{ secrets.NEXT_PUBLIC_AWS_S3_SECRET_KEY }}" \
+            --build-arg NEXT_PUBLIC_AWS_S3_BUCKET_NAME="${{ secrets.NEXT_PUBLIC_AWS_S3_BUCKET_NAME }}" \
             --build-arg NEXT_PUBLIC_AWS_S3_SECRET_NAME="${{ secrets.NEXT_PUBLIC_AWS_S3_SECRET_NAME }}" \
             --build-arg NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY="${{ secrets.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY }}" \
             --build-arg NEXT_PUBLIC_CLIENT_URL="${{ secrets.NEXT_PUBLIC_CLIENT_URL }}" \
