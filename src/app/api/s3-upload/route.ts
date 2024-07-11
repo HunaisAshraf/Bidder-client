@@ -17,6 +17,11 @@ async function uploadToS3(file: any, fileName: any) {
 
     console.log("next", process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME);
     console.log("client", process.env.AWS_S3_BUCKET_NAME);
+    console.log("AWS Region:", process.env.NEXT_PUBLIC_AWS_S3_REGION);
+    console.log(
+      "AWS Access Key ID:",
+      process.env.NEXT_PUBLIC_AWS_S3_ACCESS_KEY_ID
+    );
 
     const params = {
       Bucket: process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME,
@@ -27,9 +32,14 @@ async function uploadToS3(file: any, fileName: any) {
     console.log("params ", params);
     const command = new PutObjectCommand(params);
 
+    console.log("s3 client ", s3Client);
+
     const url = await getSignedUrl(s3Client, command, { expiresIn: 3600 });
 
+    console.log("s3 client ", url);
     const data = await s3Client.send(command);
+
+    console.log("data", data);
 
     return url.split("?")[0];
   } catch (error: any) {
