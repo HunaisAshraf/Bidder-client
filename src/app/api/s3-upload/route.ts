@@ -19,7 +19,7 @@ async function uploadToS3(file: any, fileName: any) {
     console.log("client", process.env.AWS_S3_BUCKET_NAME);
 
     const params = {
-      Bucket: process.env.AWS_S3_BUCKET_NAME,
+      Bucket: process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME,
       Key: `${fileName}-${Date.now()}`,
       Body: buffer,
       ContentType: "image/*",
