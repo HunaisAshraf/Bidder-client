@@ -16,7 +16,7 @@ async function uploadToS3(file: any, fileName: any) {
     const buffer = Buffer.from(await file.arrayBuffer());
 
     console.log("next", process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME);
-    console.log("client", process.env.AWS_S3_BUCKET_NAME);
+    console.log("secret", process.env.NEXT_PUBLIC_AWS_S3_SECRET_KEY);
     console.log("AWS Region:", process.env.NEXT_PUBLIC_AWS_S3_REGION);
     console.log(
       "AWS Access Key ID:",
