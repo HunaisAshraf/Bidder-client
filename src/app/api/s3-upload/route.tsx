@@ -21,7 +21,7 @@ async function uploadToS3(file: any, fileName: any) {
       Body: buffer,
       ContentType: "image/*",
     };
-
+    console.log("params ", params);
     const command = new PutObjectCommand(params);
 
     const url = await getSignedUrl(s3Client, command, { expiresIn: 3600 });
