@@ -18,6 +18,8 @@ export const useSocket = () => {
   };
 
   useEffect(() => {
+    console.log(process.env.NEXT_PUBLIC_SERVER_HOST);
+
     const socket = io(process.env.NEXT_PUBLIC_SERVER_HOST as string, {
       withCredentials: true,
     });
