@@ -15,11 +15,13 @@ export default function WalletTableComponent({ transcation }: any) {
   const arr = [];
 
   for (let i = transcation.length - 1; i >= 0; i--) {
-    arr.push({
-      id: i + 1,
-      ...transcation[i],
-      date: moment(transcation[i].time).format("lll"),
-    });
+    if (transcation?.amount) {
+      arr.push({
+        id: i + 1,
+        ...transcation[i],
+        date: moment(transcation[i].time).format("lll"),
+      });
+    }
   }
   rows = arr;
   return (

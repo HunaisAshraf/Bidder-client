@@ -15,31 +15,17 @@ async function uploadToS3(file: any, fileName: any) {
   try {
     const buffer = Buffer.from(await file.arrayBuffer());
 
-    console.log("next", process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME);
-    console.log("secret", process.env.NEXT_PUBLIC_AWS_S3_SECRET_KEY);
-    console.log("AWS Region:", process.env.NEXT_PUBLIC_AWS_S3_REGION);
-    console.log(
-      "AWS Access Key ID:",
-      process.env.NEXT_PUBLIC_AWS_S3_ACCESS_KEY_ID
-    );
-
     const params = {
       Bucket: process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME,
       Key: `${fileName}-${Date.now()}`,
       Body: buffer,
       ContentType: "image/*",
     };
-    console.log("params ", params);
     const command = new PutObjectCommand(params);
-
-    console.log("s3 client ", command);
 
     const url = await getSignedUrl(s3Client, command, { expiresIn: 3600 });
 
-    console.log("s3 client ", url);
     const data = await s3Client.send(command);
-
-    console.log("data", data);
 
     return url.split("?")[0];
   } catch (error: any) {
