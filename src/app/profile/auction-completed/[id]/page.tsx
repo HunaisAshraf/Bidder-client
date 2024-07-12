@@ -43,6 +43,16 @@ export default async function Statement({
 
   console.log(data);
 
+  const winData = {
+    item: data?.auctionData.auctionItem.itemName,
+    description: data?.auctionData.auctionItem.description,
+    basePrice: data?.auctionData.auctionItem.basePrice,
+    bidAmount: data?.auctionData.bidAmount,
+    winner: data?.auctionData.user.name,
+    startDate: data?.auctionData.auctionItem.startDate,
+    endDate: data?.auctionData.auctionItem.endDate,
+  };
+
   return (
     <div className="p-6">
       <h1 className="text-2xl font-bold mb-4">Auction Details</h1>
@@ -136,7 +146,7 @@ export default async function Statement({
       )}
 
       {data && data.bidsData.length > 0 ? (
-        <BidStatementTable data={data} />
+        <BidStatementTable auction={winData} data={data} />
       ) : (
         <p>No bids available.</p>
       )}
