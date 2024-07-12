@@ -15,7 +15,7 @@ export default function WalletTableComponent({ transcation }: any) {
   const arr = [];
 
   for (let i = transcation.length - 1; i >= 0; i--) {
-    if (transcation?.amount) {
+    if (transcation[i]?.amount) {
       arr.push({
         id: i + 1,
         ...transcation[i],
