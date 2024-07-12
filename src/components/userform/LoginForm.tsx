@@ -81,7 +81,7 @@ export default function LoginForm() {
           <Spinner />
         ) : (
           <button className="bg-[#002A2C] w-full text-white font-semibold p-3 rounded-md">
-            Loing
+            Login
           </button>
         )}
       </form>
