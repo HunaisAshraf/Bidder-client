@@ -55,9 +55,11 @@ export default function WatchList() {
   }
 
   return (
-    <div className="mx-6 md:mx-16 lg:mx-32 min-h-[90vh] mt-2">
-      <h1 className="font-semibold text-2xl text-slate-600">Watch Lists</h1>
-      <div className="my-8">
+    <div className="mx-16 md:mx-16 lg:mx-32 min-h-[90vh] mt-2">
+      <h1 className="font-semibold text-xl sm:text-2xl text-slate-600">
+        Watch Lists
+      </h1>
+      <div className="my-8 flex gap-3 flex-wrap">
         {auctions.map((auction: any) => (
           <WatchListCard
             key={auction._id}

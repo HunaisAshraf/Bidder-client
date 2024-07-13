@@ -24,22 +24,21 @@ async function getChat() {
 export default async function Chat() {
   const chats = await getChat();
   return (
+    // <div className="flex flex-col sm:flex-row my-3 mx-4 md:mx-12 lg:mx-36">
+    //   <div className="w-full sm:w-1/4 min-h-[85vh] shadow-lg p-4 mb-4 md:mb-0">
+    //     <ChatListComponent chats={chats} />
+    //   </div>
+    //   <div className="w-full sm:w-3/4 min-h-[85vh] shadow-lg p-4">
+    //     <ChatComponent />
+    //   </div>
+    // </div>
     <div className="flex flex-col sm:flex-row my-3 mx-4 md:mx-12 lg:mx-36">
-      <div className="w-full sm:w-1/4 min-h-[85vh] shadow-lg p-4 mb-4 md:mb-0">
+      <div className="w-full sm:w-1/4 min-h-[85vh] shadow-lg p-4 mb-4 sm:mb-0">
         <ChatListComponent chats={chats} />
       </div>
       <div className="w-full sm:w-3/4 min-h-[85vh] shadow-lg p-4">
         <ChatComponent />
       </div>
     </div>
-
-    // <div className="mx-12 md:mx-36 flex my-3">
-    //   <div className="w-1/4 min-h-[85vh] shadow-lg p-4">
-    //     <ChatListComponent chats={chats} />
-    //   </div>
-    //   <div className="w-3/4 min-h-[85vh] shadow-lg">
-    //     <ChatComponent />
-    //   </div>
-    // </div>
   );
 }

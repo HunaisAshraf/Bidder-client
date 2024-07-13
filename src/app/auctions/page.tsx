@@ -71,27 +71,83 @@ export default function Auction() {
   console.log("upcoming", upcoming);
 
   return (
-    <div className="mx-8 md:mx-16 lg:mx-32 min-h-[91vh] mt-2">
+    // <div className="mx-4 md:mx-16 lg:mx-32 min-h-[91vh] mt-2">
+    //   {live && live.length > 0 && (
+    //     <div className=" md:mt-5">
+    //       <h1 className="text-gray-500 text-xl md:text-3xl font-bold">
+    //         Live <span className="text-[#231656]">Auction</span>
+    //       </h1>
+    //       {/* <div className="flex items-center justify-between">
+    //         <div className="flex">
+    //           <input
+    //             className="outline-none shadow-md px-4 py-2 rounded-l-full w-[120px] md:w-[400px]"
+    //             placeholder="Search..."
+    //             type="text"
+    //           />
+    //           <button className="bg-[#231656] text-white py-2 px-4 rounded-r-full font-semibold">
+    //             search
+    //           </button>
+    //         </div>
+    //       </div> */}
+    //       <div className="my-4 mx-8 md:mx-0 flex flex-wrap">
+    //         {live?.map((auction) => (
+    //           <Link href={`/auctions/${auction._id}`} key={auction._id}>
+    //             <AuctionCard
+    //               id={auction._id}
+    //               basePrice={auction.basePrice}
+    //               description={auction.description}
+    //               endDate={auction.endDate}
+    //               itemName={auction.itemName}
+    //               startDate={auction.startDate}
+    //               image={auction.images[0]}
+    //               completed={auction.completed}
+    //               auctioner={auction.auctioner}
+    //             />
+    //           </Link>
+    //         ))}
+    //       </div>
+    //     </div>
+    //   )}
+    //   {upcoming && upcoming.length > 0 && (
+    //     <div className="md:mt-5">
+    //       <div>
+    //         <h1 className="text-gray-500 text-xl md:text-3xl font-bold">
+    //           Upcoming <span className="text-[#231656]">Auction</span>
+    //         </h1>
+    //       </div>
+    //       <div className="my-4 flex flex-wrap">
+    //         {upcoming?.map((auction) => (
+    //           <Link href={`/auctions/${auction._id}`} key={auction._id}>
+    //             <AuctionCard
+    //               id={auction._id}
+    //               basePrice={auction.basePrice}
+    //               description={auction.description}
+    //               endDate={auction.endDate}
+    //               itemName={auction.itemName}
+    //               startDate={auction.startDate}
+    //               image={auction.images[0]}
+    //               completed={auction.completed}
+    //               auctioner={auction.auctioner}
+    //             />
+    //           </Link>
+    //         ))}
+    //       </div>
+    //     </div>
+    //   )}
+    // </div>
+    <div className="mx-4 md:mx-16 lg:mx-32 min-h-[91vh] mt-2">
       {live && live.length > 0 && (
-        <div className=" md:mt-5">
+        <div className="md:mt-5">
           <h1 className="text-gray-500 text-xl md:text-3xl font-bold">
             Live <span className="text-[#231656]">Auction</span>
           </h1>
-          {/* <div className="flex items-center justify-between">
-            <div className="flex">
-              <input
-                className="outline-none shadow-md px-4 py-2 rounded-l-full w-[120px] md:w-[400px]"
-                placeholder="Search..."
-                type="text"
-              />
-              <button className="bg-[#231656] text-white py-2 px-4 rounded-r-full font-semibold">
-                search
-              </button>
-            </div>
-          </div> */}
-          <div className="my-4 mx-12 md:mx-0 flex flex-wrap">
+          <div className="my-4 flex flex-wrap gap-4 justify-center">
             {live?.map((auction) => (
-              <Link href={`/auctions/${auction._id}`} key={auction._id}>
+              <Link
+                href={`/auctions/${auction._id}`}
+                key={auction._id}
+                className="flex-grow md:flex-grow-0"
+              >
                 <AuctionCard
                   id={auction._id}
                   basePrice={auction.basePrice}
@@ -115,9 +171,13 @@ export default function Auction() {
               Upcoming <span className="text-[#231656]">Auction</span>
             </h1>
           </div>
-          <div className="my-4 flex flex-wrap">
+          <div className="my-4 flex flex-wrap gap-4 justify-center">
             {upcoming?.map((auction) => (
-              <Link href={`/auctions/${auction._id}`} key={auction._id}>
+              <Link
+                href={`/auctions/${auction._id}`}
+                key={auction._id}
+                className="flex-grow md:flex-grow-0"
+              >
                 <AuctionCard
                   id={auction._id}
                   basePrice={auction.basePrice}
