@@ -24,6 +24,7 @@ export type Auction = {
   _id: string;
   itemName: string;
   basePrice: number;
+  currentBid: number;
   description: string;
   startDate: Date;
   endDate: Date;

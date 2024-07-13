@@ -17,6 +17,9 @@ import Image from "next/image";
 import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import SearchIcon from "@mui/icons-material/Search";
+import exceljs from "exceljs";
+import XLSX, { utils, writeFile } from "xlsx";
+import moment from "moment";
 
 export default function Auctions() {
   const [auctions, setAuctions] = useState<Auction[]>([]);
@@ -89,6 +92,33 @@ export default function Auctions() {
       console.log(error);
     }
   };
+  console.log(auctions);
+
+  const downloadReport = async () => {
+    const workSheet = utils.json_to_sheet(
+      auctions.map((auction) => ({
+        Id: auction._id,
+        Item: auction.itemName,
+        BasePrice: auction.basePrice,
+        CurrentBid: auction.currentBid,
+        "Start Date": moment(auction.startDate).format("lll"),
+        "End Date": moment(auction.endDate).format("lll"),
+        Auctioneer: auction.auctioner,
+        Status: auction.isBlocked
+          ? "Blocked"
+          : !auction.isVerified
+          ? "Not Verified"
+          : auction.completed
+          ? "Completed"
+          : "Live",
+      }))
+    );
+
+    const workBook = utils.book_new();
+    utils.book_append_sheet(workBook, workSheet, "auctions");
+
+    writeFile(workBook, "report.xlsx");
+  };
 
   useEffect(() => {
     const getAuctions = async () => {
@@ -128,6 +158,12 @@ export default function Auctions() {
             <SearchIcon />
           </button>
         </form>
+        <button
+          onClick={downloadReport}
+          className="p-2 bg-[#231656] text-white"
+        >
+          Report
+        </button>
         <select
           onChange={(e) => setFilter(e.target.value)}
           className="bg-[#F9FBFF]  outline-none  border-2 border-[#a7bbe3] rounded-sm px-3 py-2"
