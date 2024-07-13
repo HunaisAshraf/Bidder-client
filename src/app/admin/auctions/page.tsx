@@ -103,7 +103,7 @@ export default function Auctions() {
         CurrentBid: auction.currentBid,
         "Start Date": moment(auction.startDate).format("lll"),
         "End Date": moment(auction.endDate).format("lll"),
-        Auctioneer: auction.auctioner,
+        Auctioneer: auction.auctioner.name,
         Status: auction.isBlocked
           ? "Blocked"
           : !auction.isVerified
