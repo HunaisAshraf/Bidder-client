@@ -11,6 +11,10 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  compiler: {
+    // Remove all console logs
+    removeConsole: true
+  }
 };
 
 export default nextConfig;
