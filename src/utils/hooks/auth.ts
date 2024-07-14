@@ -17,46 +17,9 @@ export const useAuth = () => {
     }
   }
 
-  // async function verifyToken(token: string) {
-  //   try {
-  //     console.log(token);
-
-  //     let { data } = await axiosInstance.get("/api/v1/auth/verify-token", {
-  //       headers: {
-  //         Authorization: `Bearer ${token}`,
-  //       },
-  //     });
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   const user = localStorage.getItem("auth");
-  //   const token = localStorage.getItem("token");
-
-  //   console.log(token);
-  //   console.log(user);
-
-  //   if (token) {
-  //     verifyToken(token);
-  //   }
-
-  //   if (user) {
-  //     dispatch(setUser(JSON.parse(user)));
-  //     router.push("/");
-  //   } else {
-  //     // dispatch(logout());
-  //     // handleLogout();
-  //   }
-  // }, []);
-
   const saveAuthData = (data: any) => {
     localStorage.setItem("auth", JSON.stringify(data));
     dispatch(setUser(data));
-    // router.push("/");
   };
   return { saveAuthData };
 };
-
-// export default useAuth;

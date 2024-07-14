@@ -26,7 +26,6 @@ const links = [
   { title: "Auction", href: "/auctions" },
   { title: "Watch List", href: "/watchlist" },
   { title: "Chat", href: "/chat" },
-  // { title: "Notification", href: "#" },
 ];
 
 function count(notifications: any, userId: any) {
@@ -66,8 +65,6 @@ export default function Header() {
     setAnchorEl(null);
   };
 
-  // setnotificationCount(count(notification, user?._id));
-
   const toggleMenu = () => {
     setMenu(!menu);
   };
@@ -99,19 +96,6 @@ export default function Header() {
       console.log(error);
     }
   };
-
-  // useEffect(() => {
-  //   if (session?.user) {
-  //     const userData = {
-  //       name: session.user.name,
-  //       email: session.user.email,
-  //       profilePicture: session.user.image,
-  //     };
-
-  //     localStorage.setItem("auth", JSON.stringify(userData));
-  //     dispatch(setUser(userData));
-  //   }
-  // }, [, dispatch]);
 
   useEffect(() => {
     async function verifyToken() {
@@ -159,7 +143,6 @@ export default function Header() {
   }, [socket]);
 
   useEffect(() => {
-    // setnotificationCount(count(notification, user?._id));
     const getNotifications = async () => {
       try {
         const { data } = await axiosInstance.get(

@@ -18,9 +18,6 @@ function Payment() {
 
   const amount = searchParams.get("amount");
 
-  //   const appearance = {
-  //     theme: "stripe",
-  //   };
   const options = {
     clientSecret,
   };

@@ -3,7 +3,6 @@ import NextAuth, { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import { useAuth } from "@/utils/hooks/auth";
 
-// const { saveAuthData } = useAuth();
 const authOptions: NextAuthOptions = {
   providers: [
     GoogleProvider({
@@ -35,8 +34,6 @@ const authOptions: NextAuthOptions = {
     },
   },
 };
-
-// export default NextAuth(authOptions);
 
 const handler = NextAuth(authOptions);
 

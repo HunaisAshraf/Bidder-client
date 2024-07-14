@@ -173,9 +173,16 @@ export default function SingleAuction({
               width={500}
               height={400}
             />
-            <div className="flex flex-wrap gap-2 mt-2">
+            <div className="flex flex-wrap gap-2 mt-2 md:mx-12">
               {auction.images?.map((img: string, i: number) => (
-                <Image key={i} src={img} alt="" height={100} width={150} />
+                <Image
+                  className="h-28 w-32"
+                  key={i}
+                  src={img}
+                  alt=""
+                  height={100}
+                  width={150}
+                />
               ))}
             </div>
           </div>

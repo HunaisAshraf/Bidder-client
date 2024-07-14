@@ -7,10 +7,6 @@ type ChatData = {
 };
 
 const initialState: ChatData[] = [];
-// {
-//   user: null,
-//   newMessage: null,
-// };
 
 const notification = createSlice({
   name: "notification",

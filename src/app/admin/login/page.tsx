@@ -1,11 +1,9 @@
 import Link from "next/link";
-// import useAuth from "@/utils/hooks/auth";
+
 import LoginForm from "@/components/userform/LoginForm";
 import GoogleSigninButton from "@/components/GoogleSigninButton";
 
 export default function Login() {
-  // useAuth();
-
   return (
     <div className="lg:mx-96 md:shadow-lg flex justify-center items-center min-h-[91vh]">
       <div>

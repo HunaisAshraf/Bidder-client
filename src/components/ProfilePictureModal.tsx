@@ -35,8 +35,6 @@ type FormValues = {
   email: string | undefined;
   phone: string | undefined;
   image: File[] | undefined;
-  // password: string;
-  // confirmPassword: string;
 };
 
 export default function ProfilePictureModal() {

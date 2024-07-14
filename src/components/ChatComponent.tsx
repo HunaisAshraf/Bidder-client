@@ -172,20 +172,11 @@ export default function ChatComponent({ onChatSelect }: { onChatSelect: any }) {
       setMessages((prev) => [...prev, data]);
     });
 
-    // socket?.on("notification_send", ({ user, newMessage }) => {
-    //   console.log("notification received", user, newMessage);
-    // });
-
     socket?.on("incoming_call", (invitedUser) => {
       if (invitedUser.selectedUser === user?._id) {
-        // setCall()
         handleOpen();
       }
     });
-
-    // socket?.on("user-joined", (room, joinedUser) => {
-    //   console.log("room", room, " joinded ", joinedUser);
-    // });
 
     return () => {
       socket?.off("receive_message");

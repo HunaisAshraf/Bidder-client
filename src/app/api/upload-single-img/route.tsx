@@ -61,37 +61,7 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // const cookie = request.cookies.get("token")?.value;
-
-    // let { data } = await axiosInstance.put(
-    //   "/api/auth/update-profile-image",
-    //   { fileUrl },
-    //   {
-    //     headers: {
-    //       Authorization: `Bearer ${cookie}`,
-    //     },
-    //   }
-    // );
-
-    // console.log(data);
-
-    // const user = {
-    //   ...data.user,
-    //   password: undefined,
-    //   verifyToken: undefined,
-    //   verifyTokenExpiry: undefined,
-    // };
-    // console.log(user);
-
-    // if (data.success) {
-    // return NextResponse.json({ success: true, user });
-    // }
-
-    console.log(uploadedImage);
-
     return NextResponse.json({ success: true, uploadedImage });
-
-    // return NextResponse.json({ succes: false });
   } catch (error: any) {
     console.log("error in router", error.data.error);
     return NextResponse.json({ success: false });

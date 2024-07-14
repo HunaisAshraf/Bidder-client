@@ -15,8 +15,6 @@ export default function ForgotPasswordForm() {
   const { errors } = formState;
   const router = useRouter();
 
-  // const dispatch = useAppDispatch();
-
   const handleForgotPassword = async (formData: any) => {
     try {
       setLoading(true);
@@ -29,9 +27,6 @@ export default function ForgotPasswordForm() {
       );
 
       if (data?.success) {
-        // localStorage.setItem("auth", JSON.stringify(data.user));
-        // localStorage.setItem("token", JSON.stringify(data?.token));
-        // dispatch(setUser(data.user));
         router.replace("/forgot-password/confirm-mail");
       }
     } catch (error: any) {

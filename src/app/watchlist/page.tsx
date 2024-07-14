@@ -2,32 +2,9 @@
 
 import WatchListCard from "@/components/watchListCard";
 import { axiosInstance } from "@/utils/constants";
-import axios from "axios";
-import { cookies } from "next/headers";
 import React, { useEffect, useState } from "react";
 
-// async function getData() {
-//   try {
-//     const token = cookies().get("token");
-
-//     const { data } = await axios.get(
-//       `${process.env.NEXT_PUBLIC_SERVER_HOST}/api/v1/watchlist/get-watchlist`,
-//       {
-//         headers: {
-//           Authorization: `Bearer ${token?.value}`,
-//         },
-//       }
-//     );
-//     return data.watchLists;
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }
-
 export default function WatchList() {
-  // const data = await getData();
-  // console.log(data); // const data = await getData();
-  // console.log(data);
   const [auctions, setAuctions] = useState([]);
   const [change, setChange] = useState(false);
   useEffect(() => {

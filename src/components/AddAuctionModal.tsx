@@ -41,8 +41,6 @@ type FormValues = {
   endDate: Date;
   description: string;
   images: File[];
-  // password: string;
-  // confirmPassword: string;
 };
 
 export default function AddAuctionModal({

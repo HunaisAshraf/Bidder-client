@@ -33,8 +33,6 @@ type FormValues = {
   endDate: string;
   description: string;
   images: string[];
-  // password: string;
-  // confirmPassword: string;
 };
 
 export default function EditAuctionModal({
@@ -135,33 +133,6 @@ export default function EditAuctionModal({
     } catch (error) {
       console.log(error);
     }
-
-    // try {
-    //   const file = e.target.files;
-    //   if (file) {
-    //     console.log(file[0], index);
-    //     setImages((prev) => prev.filter((p) => p.index !== index));
-    //     const image = {
-    //       index,
-    //       file: file[0],
-    //     };
-    //     setImages((prev) => [...prev, image]);
-
-    //     for (let img of images) {
-    //       console.log("sadsssssssssssssssss",img.file);
-
-    //       let image = document.getElementById(`image${img.index}`);
-    //       console.log(image);
-
-    //       if(image){
-
-    //         image?.setAttribute("src", URL.createObjectURL(img.file));
-    //         }
-    //     }
-    //   }
-    // } catch (error) {
-    //   console.log(error);
-    // }
   };
 
   useEffect(() => {

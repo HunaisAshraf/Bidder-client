@@ -20,7 +20,6 @@ export default function ChatListComponent({
   chats: Chats[];
   onChatSelect: React.Dispatch<React.SetStateAction<any>>;
 }) {
-  // const [chats, setChats] = useState();
   const currUser = useAppSelector((state) => state.users.user);
   const dispatch = useAppDispatch();
 

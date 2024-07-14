@@ -25,9 +25,8 @@ const links = [
     role: "auctioner",
   },
   { title: "Auction Won", href: "/profile/auction-won", role: "bidder" },
-  { title: "Watch List", href: "/profile/watchlist", role: "bidder" },
+
   { title: "Wallet", href: "/profile/wallet" },
-  { title: "Address", href: "/profile/address", role: "bidder" },
 ];
 
 export default function ProfileComponent() {
@@ -54,32 +53,34 @@ export default function ProfileComponent() {
   }, [pathname, user?.role, router, redirected]);
 
   return (
-    <div className="">
-      <div className="flex items-center gap-3">
+    <div className="p-4">
+      <div className="flex  flex-row items-center gap-3">
         {user?.profilePicture ? (
           <Image
             width={160}
             height={160}
             src={user?.profilePicture}
             alt={user?.name}
-            className="rounded-full md:h-36 md:w-36"
+            className="rounded-full w-36 h-36 md:w-36 md:h-36"
           />
         ) : (
-          <>
-            <AccountCircleIcon sx={{ fontSize: 200 }} />
-          </>
+          <AccountCircleIcon
+            sx={{ fontSize: 100 }}
+            className="md:!text-[200px]"
+          />
         )}
-        <p className="text-3xl font-semibold">{user?.name}</p>
-        <EditProfileComponent />
+        <div className="flex  items-center md:items-start mt-4 md:mt-0">
+          <p className="text-2xl md:text-3xl font-semibold">{user?.name}</p>
+          <EditProfileComponent />
+        </div>
       </div>
       <div className="my-10">
-        <ul className="flex items-center gap-6">
+        <ul className="flex flex-wrap items-center gap-3 md:gap-6">
           {filteredLink.map((l) => {
             const isActive = pathname === l.href ? true : false;
             return (
               <li key={l.title}>
                 <Link
-                  key={l.title}
                   className={
                     isActive
                       ? "text-blue-600 font-semibold"

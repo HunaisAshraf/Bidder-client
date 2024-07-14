@@ -14,7 +14,6 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Typography,
 } from "@mui/material";
 import { GridSearchIcon } from "@mui/x-data-grid";
 import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
@@ -39,9 +38,14 @@ export default function Users() {
   const [filter, setFilter] = useState<string | null>(null);
   const [change, setChange] = useState(false);
   const [search, setSearch] = useState("");
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const [selectedUser, setSelectedUser] = useState("");
+
+  const [open, setBlockOpen] = useState(false);
+  const [unblockOpen, setUnblockOpen] = useState(false);
+  const handleBlockOpen = () => setBlockOpen(true);
+  const handleBlockClose = () => setBlockOpen(false);
+  const handleUnblockOpen = () => setUnblockOpen(true);
+  const handleUnblockClose = () => setUnblockOpen(false);
 
   const filterUser = async () => {
     try {
@@ -68,6 +72,8 @@ export default function Users() {
       if (data.success) {
         toast.success(data.message);
         setChange(!change);
+        handleBlockClose();
+        handleUnblockClose();
       }
     } catch (error) {
       toast.error("failed to block/unblock user");
@@ -179,42 +185,81 @@ export default function Users() {
                 <TableCell>
                   {user.isActive ? (
                     <button
-                      onClick={() => handleStatus(user._id)}
+                      onClick={() => {
+                        setSelectedUser(user._id);
+                        handleBlockOpen();
+                      }}
                       className="bg-green-500 border-2 border-green-800 py-2 px-3 rounded-sm"
                     >
                       Active
                     </button>
                   ) : (
                     <button
-                      onClick={() => handleStatus(user._id)}
+                      onClick={() => {
+                        setSelectedUser(user._id);
+                        handleUnblockOpen();
+                      }}
                       className="bg-red-500 border-2 border-red-900 text-white py-2 px-3 rounded-sm"
                     >
                       Blocked
                     </button>
                   )}
                 </TableCell>
-                <Modal
-                  open={open}
-                  onClose={handleClose}
-                  aria-labelledby="modal-modal-title"
-                  aria-describedby="modal-modal-description"
-                >
-                  <Box sx={style}>
-                    <Typography
-                      id="modal-modal-title"
-                      variant="h6"
-                      component="h2"
-                    >
-                      Text in a modal
-                    </Typography>
-                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                      Duis mollis, est non commodo luctus, nisi erat porttitor
-                      ligula.
-                    </Typography>
-                  </Box>
-                </Modal>
+                {/* <button onClick={handleOpen}>Open responsive dialog</button> */}
               </TableRow>
             ))}
+            <Modal
+              open={open}
+              onClose={handleBlockClose}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+            >
+              <Box sx={style}>
+                <p className="text-2xl font-semibold text-center mb-6">
+                  Do you want to block this user
+                </p>
+                <div className="text-center">
+                  <button
+                    onClick={() => handleStatus(selectedUser)}
+                    className="p-2 mx-3 bg-[#231656] text-white font-semibold"
+                  >
+                    Confirm
+                  </button>
+                  <button
+                    onClick={handleBlockClose}
+                    className="p-2 mx-3 bg-red-800 text-white font-semibold"
+                  >
+                    Decline
+                  </button>
+                </div>
+              </Box>
+            </Modal>
+            <Modal
+              open={unblockOpen}
+              onClose={handleUnblockClose}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+            >
+              <Box sx={style}>
+                <p className="text-2xl font-semibold text-center mb-6">
+                  Do you want to Unblock this user
+                </p>
+                <div className="text-center">
+                  <button
+                    onClick={() => handleStatus(selectedUser)}
+                    className="p-2 mx-3 bg-[#231656] text-white font-semibold"
+                  >
+                    Confirm
+                  </button>
+                  <button
+                    onClick={handleUnblockClose}
+                    className="p-2 mx-3 bg-red-800 text-white font-semibold"
+                  >
+                    Decline
+                  </button>
+                </div>
+              </Box>
+            </Modal>
           </TableBody>
         </Table>
       </TableContainer>

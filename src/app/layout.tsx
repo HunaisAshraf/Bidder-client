@@ -3,7 +3,6 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import StoreProvider from "./StoreProvider";
-// import AuthHandler from "@/utils/AuthHandler";
 import { NextAuthProvider } from "./SessionProvider";
 import { usePathname, useRouter } from "next/navigation";
 import { headers } from "next/headers";
@@ -30,9 +29,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <StoreProvider>
           <NextAuthProvider>
-            {/* <AuthHandler /> */}
             {isAdminRoute ? (
-              // <AdminLayout>{children}</AdminLayout>
               <main>{children}</main>
             ) : (
               <UserLayout>{children}</UserLayout>

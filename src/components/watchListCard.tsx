@@ -65,64 +65,6 @@ const WatchListCard = ({ auction, id, setChange }: AuctionProps) => {
     }
   };
   return (
-    // <div className="max-w-lg mx-auto bg-white shadow-lg rounded-lg overflow-hidden my-5">
-    //   <div className="flex items-center p-4">
-    //     <Image
-    //       height={180}
-    //       width={260}
-    //       className="rounded"
-    //       src={auction?.images[0]}
-    //       alt={auction?.itemName}
-    //     />
-    //     <div className="p-2 w-full">
-    //       {isLive && (
-    //         <div className="mb-2 flex justify-center">
-    //           <span className="text-center shadow-lg text-green-500 px-4 py-2 rounded-lg">
-    //             Live
-    //           </span>
-    //         </div>
-    //       )}
-    //       <h1 className="text-2xl font-semibold">{auction?.itemName}</h1>
-    //       <p className="text-gray-500">{auction?.description}</p>
-    //       <div className="flex gap-6 mt-4">
-    //         <div>
-    //           {new Date(auction?.startDate) > new Date() ? (
-    //             <>
-    //               <h1 className="text-xl font-semibold">Auction Start Date</h1>
-    //               <p className="text-gray-500">
-    //                 {moment(auction?.startDate).format("lll")}
-    //               </p>
-    //             </>
-    //           ) : (
-    //             <>
-    //               <h1 className="text-xl font-semibold">Auction Ending</h1>
-    //               <p className="text-gray-500">
-    //                 {moment(auction?.endDate).format("lll")}
-    //               </p>
-    //             </>
-    //           )}
-    //         </div>
-    //         <div>
-    //           <p className="font-bold">$ Current Bid</p>
-    //           <p className="text-gray-500">${auction?.currentBid}</p>
-    //           {user?._id !== auction?.auctioner && (
-    //             <div className="mt-3">
-    //               {auction?.completed ? (
-    //                 <button className="p-2 shadow bg-yellow-500 text-white font-semibold rounded-lg">
-    //                   Completed
-    //                 </button>
-    //               ) : (
-    //                 <button className="p-2 shadow bg-[#200f66] text-white font-semibold rounded-lg">
-    //                   Place Bid
-    //                 </button>
-    //               )}
-    //             </div>
-    //           )}
-    //         </div>
-    //       </div>
-    //     </div>
-    //   </div>
-    // </div>
     <Link href={`/auctions/${auction._id}`}>
       <Card sx={{ maxWidth: 345 }}>
         <Toaster />

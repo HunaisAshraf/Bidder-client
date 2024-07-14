@@ -4,6 +4,8 @@ import AdminLayout from "@/components/Layout/AdminLayout";
 import { adminAxiosInstance } from "@/utils/constants";
 import { Auction, User } from "@/utils/types";
 import {
+  Box,
+  Modal,
   Pagination,
   Paper,
   Table,
@@ -21,6 +23,18 @@ import exceljs from "exceljs";
 import XLSX, { utils, writeFile } from "xlsx";
 import moment from "moment";
 
+const style = {
+  position: "absolute" as "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+};
+
 export default function Auctions() {
   const [auctions, setAuctions] = useState<Auction[]>([]);
   const [page, setPage] = useState<number>(1);
@@ -28,6 +42,14 @@ export default function Auctions() {
   const [filter, setFilter] = useState<string | null>(null);
   const [change, setChange] = useState(false);
   const [search, setSearch] = useState("");
+  const [selectedAuction, setSelectedAuction] = useState("");
+
+  const [open, setBlockOpen] = useState(false);
+  const [unblockOpen, setUnblockOpen] = useState(false);
+  const handleBlockOpen = () => setBlockOpen(true);
+  const handleBlockClose = () => setBlockOpen(false);
+  const handleUnblockOpen = () => setUnblockOpen(true);
+  const handleUnblockClose = () => setUnblockOpen(false);
 
   const filterAuctions = async () => {
     try {
@@ -62,8 +84,6 @@ export default function Auctions() {
 
   const handleStatus = async (id: string) => {
     try {
-      console.log("aldksfjkl");
-
       const { data } = await adminAxiosInstance.put(
         `/api/v1/auction/block-auction/${id}`
       );
@@ -71,6 +91,8 @@ export default function Auctions() {
       if (data.success) {
         toast.success(data.message);
         setChange(!change);
+        handleBlockClose();
+        handleUnblockClose();
       }
     } catch (error) {
       toast.error("failed to block/unblock auction");
@@ -241,14 +263,20 @@ export default function Auctions() {
                 <TableCell>
                   {auction.isBlocked ? (
                     <button
-                      onClick={() => handleStatus(auction._id)}
+                      onClick={() => {
+                        setSelectedAuction(auction._id);
+                        handleUnblockOpen();
+                      }}
                       className="bg-red-500 border-2 border-red-900 text-white py-2 px-3 rounded-sm"
                     >
                       Blocked
                     </button>
                   ) : (
                     <button
-                      onClick={() => handleStatus(auction._id)}
+                      onClick={() => {
+                        setSelectedAuction(auction._id);
+                        handleBlockOpen();
+                      }}
                       className="bg-green-500 border-2 border-green-800 py-2 px-3 rounded-sm"
                     >
                       Active
@@ -258,6 +286,58 @@ export default function Auctions() {
               </TableRow>
             ))}
           </TableBody>
+          <Modal
+            open={open}
+            onClose={handleBlockClose}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <Box sx={style}>
+              <p className="text-2xl font-semibold text-center mb-6">
+                Do you want to block this auction?
+              </p>
+              <div className="text-center">
+                <button
+                  onClick={() => handleStatus(selectedAuction)}
+                  className="p-2 mx-3 bg-[#231656] text-white font-semibold"
+                >
+                  Confirm
+                </button>
+                <button
+                  onClick={handleBlockClose}
+                  className="p-2 mx-3 bg-red-800 text-white font-semibold"
+                >
+                  Decline
+                </button>
+              </div>
+            </Box>
+          </Modal>
+          <Modal
+            open={unblockOpen}
+            onClose={handleUnblockClose}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <Box sx={style}>
+              <p className="text-2xl font-semibold text-center mb-6">
+                Do you want to Unblock this auction?
+              </p>
+              <div className="text-center">
+                <button
+                  onClick={() => handleStatus(selectedAuction)}
+                  className="p-2 mx-3 bg-[#231656] text-white font-semibold"
+                >
+                  Confirm
+                </button>
+                <button
+                  onClick={handleUnblockClose}
+                  className="p-2 mx-3 bg-red-800 text-white font-semibold"
+                >
+                  Decline
+                </button>
+              </div>
+            </Box>
+          </Modal>
         </Table>
       </TableContainer>
       <div className="my-2">
