@@ -19,6 +19,8 @@ import InputEmoji from "react-input-emoji";
 import AddIcon from "@mui/icons-material/Add";
 import axios from "axios";
 import { removeNotification } from "@/lib/store/features/notificationSlice";
+import { Avatar } from "@mui/material";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 const style = {
   position: "absolute" as "absolute",
@@ -41,7 +43,7 @@ type Message = {
   image: string;
 };
 
-export default function ChatComponent() {
+export default function ChatComponent({ onChatSelect }: { onChatSelect: any }) {
   const [newMessage, setNewMessage] = useState<string>("");
   const [messages, setMessages] = useState<Message[]>([]);
   const [image, setImage] = useState<File | null>(null);
@@ -250,16 +252,19 @@ export default function ChatComponent() {
         {selectedUser && (
           <div className="flex items-center justify-between gap-3 px-4 p-4">
             <div className="flex items-center gap-2">
+              <button onClick={() => onChatSelect(null)}>
+                <ArrowBackIcon />
+              </button>
               {selectedUser.profilePicture ? (
-                <Image
+                <Avatar
+                  className="-z-10"
                   src={selectedUser.profilePicture!}
                   alt={selectedUser.name}
-                  width={50}
-                  height={50}
-                  className="rounded-full"
                 />
               ) : (
-                <AccountCircleIcon sx={{ fontSize: 50 }} />
+                <Avatar className="-z-10">
+                  <AccountCircleIcon sx={{ fontSize: 50 }} />
+                </Avatar>
               )}
               <h1 className="text-2xl font-semibold">{selectedUser.name}</h1>
             </div>
