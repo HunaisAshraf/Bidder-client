@@ -26,7 +26,9 @@ export default function ChatListComponent({
 
   return (
     <div className="">
-      <h1 className="text-2xl sm:text-3xl font-semibold my-4">Messages</h1>
+      <h1 className="text-2xl sm:text-3xl font-semibold my-4 text-slate-600">
+        Messages
+      </h1>
 
       {chats?.map((chat) =>
         chat.users.map((user) => {

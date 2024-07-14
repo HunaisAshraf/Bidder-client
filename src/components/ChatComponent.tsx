@@ -202,13 +202,6 @@ export default function ChatComponent({ onChatSelect }: { onChatSelect: any }) {
     dispatch(removeNotification());
   }, []);
 
-  // useEffect(() => {
-  //   const peerId = new Peer(user?._id!);
-  //   console.log("aksjdfhkasddfk", peerId);
-
-  //   setMe(peerId);
-  // }, []);
-
   if (!chat) {
     return (
       <div className="flex justify-center items-center min-h-[85vh]">
@@ -220,7 +213,6 @@ export default function ChatComponent({ onChatSelect }: { onChatSelect: any }) {
   return (
     <div>
       <div>
-        {/* <Button onClick={handleOpen}>Open modal</Button> */}
         <Modal
           open={open}
           onClose={handleClose}
