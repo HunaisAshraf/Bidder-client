@@ -131,6 +131,7 @@ export default function SingleAuction({
         }
       } catch (error: any) {
         console.log(error);
+        router.push("/404");
       }
     };
     getAuction();
