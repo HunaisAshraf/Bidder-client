@@ -30,14 +30,10 @@ export default function UpdatePasswordForm() {
     try {
       setLoading(true);
 
-      console.log(formData);
-
       const { data } = await axiosInstance.put("/api/v1/auth/update-password", {
         password: formData.password,
         email,
       });
-
-      console.log(data);
 
       if (data?.success) {
         setLoading(false);

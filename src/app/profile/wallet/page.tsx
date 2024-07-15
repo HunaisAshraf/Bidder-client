@@ -33,7 +33,6 @@ export default function Wallet() {
       const { data } = await axiosInstance.get("/api/v1/payments/get-wallet");
 
       if (data?.success) {
-        console.log(data);
         setWallet(data?.data);
       }
     } catch (error) {

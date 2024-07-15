@@ -36,10 +36,8 @@ async function uploadToS3(file: any, fileName: any) {
 export async function POST(request: NextRequest) {
   try {
     const formData = await request.formData();
-    console.log(formData);
 
     const files = formData.getAll("images[]");
-    console.log("files", files);
 
     if (!files || files.length === 0) {
       return NextResponse.json(

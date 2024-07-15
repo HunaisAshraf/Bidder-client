@@ -53,8 +53,6 @@ export default function Users() {
         `/api/v1/auth/filter-users/?filter=${filter}&page=${page}`
       );
       if (data.success) {
-        console.log(data);
-
         setUsers(data.users);
         setCount(data.count);
       }
@@ -97,15 +95,11 @@ export default function Users() {
 
   useEffect(() => {
     const getUsers = async () => {
-      console.log(page);
-
       try {
         const { data } = await adminAxiosInstance.get(
           `/api/v1/auth/get-all-users/?page=${page}`
         );
         if (data.success) {
-          console.log(data.users);
-
           setUsers(data.users);
           setCount(data.count);
         }
@@ -120,7 +114,6 @@ export default function Users() {
     }
   }, [page, filter, change]);
 
-  console.log(count);
   return (
     <AdminLayout>
       <Toaster />

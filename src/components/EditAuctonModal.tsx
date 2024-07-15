@@ -119,15 +119,10 @@ export default function EditAuctionModal({
 
       if (data.success) {
         if (auction?.images) {
-          console.log("before edit", images);
-
           const img = [...auction?.images];
           img[index] = data.uploadedImage[0];
-          console.log("image", img);
 
           setImages(img);
-          console.log(images);
-          console.log("after edit");
         }
       }
     } catch (error) {

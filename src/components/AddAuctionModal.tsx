@@ -129,7 +129,6 @@ export default function AddAuctionModal({
     } else if (files) {
       clearErrors("images");
       setImages(Array.from(files));
-      console.log(images);
     }
   };
 

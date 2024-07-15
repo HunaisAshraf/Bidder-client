@@ -28,7 +28,6 @@ const ChartComponent = () => {
   const [user, setUser] = useState<any>();
   const [auctions, setAuctions] = useState<any>();
   const [revenue, setRevenue] = useState<any>();
-  console.log("user", revenue, user, auctions);
 
   useEffect(() => {
     const getData = async () => {
@@ -39,8 +38,6 @@ const ChartComponent = () => {
         );
 
         const [userData, auctionsData] = await Promise.all([user, auctions]);
-
-        console.log(userData, auctionsData);
 
         setUser(userData.data.data);
         setAuctions(auctionsData.data.count);

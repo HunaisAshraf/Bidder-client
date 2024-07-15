@@ -82,7 +82,6 @@ export default function ChatComponent({ onChatSelect }: { onChatSelect: any }) {
             "Content-Type": "multipart/form-data",
           },
         });
-        console.log(data);
 
         if (data.success) {
           newImg = data.uploadedImage[0];
@@ -93,8 +92,6 @@ export default function ChatComponent({ onChatSelect }: { onChatSelect: any }) {
         { message: newMessage, image: newImg }
       );
       if (data.success) {
-        console.log(data);
-
         setNewMessage("");
         setImage(null);
         socket?.emit("send_message", { newMessage, newImg, chat });

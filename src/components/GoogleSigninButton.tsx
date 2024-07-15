@@ -35,8 +35,6 @@ export default function GoogleSigninButton() {
           userData
         );
 
-        console.log(data);
-
         if (data?.success) {
           localStorage.setItem("auth", JSON.stringify(data?.user));
           localStorage.setItem("token", JSON.stringify(data.token));

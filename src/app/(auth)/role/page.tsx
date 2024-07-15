@@ -16,18 +16,14 @@ export default function Role() {
 
   const handleUpdateRole = async (role: string) => {
     try {
-      console.log(localStorage.getItem("token"));
-
       const { data } = await axiosInstance.put(`/api/v1/auth/update-user`, {
         role,
       });
-      console.log(data);
       if (data.success) {
         const user = {
           ...data.user,
         };
 
-        console.log(user);
         dispatch(setUser(user));
         localStorage.setItem("auth", JSON.stringify(user));
 

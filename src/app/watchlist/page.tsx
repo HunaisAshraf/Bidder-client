@@ -13,8 +13,6 @@ export default function WatchList() {
         "/api/v1/watchlist/get-watchlist"
       );
       if (data.success) {
-        console.log(data);
-
         setAuctions(data.watchLists);
       }
     };

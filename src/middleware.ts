@@ -43,7 +43,6 @@ export function middleware(req: NextRequest) {
       protectedRouteRegex.test(currentRoute))
   ) {
     const absoluteUrl = new URL("/login", req.nextUrl.origin);
-    console.log("prt rot:", absoluteUrl.toString());
 
     return NextResponse.redirect(absoluteUrl.toString());
   }

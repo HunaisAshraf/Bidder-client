@@ -67,8 +67,6 @@ export default function Auction() {
       </div>
     );
   }
-  console.log("live", live);
-  console.log("upcoming", upcoming);
 
   return (
     <div className="mx-4 md:mx-16 lg:mx-32 min-h-[91vh] mt-2">

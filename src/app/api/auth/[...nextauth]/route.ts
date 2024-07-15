@@ -21,11 +21,9 @@ const authOptions: NextAuthOptions = {
         };
 
         if (user) {
-          console.log(true);
           return true;
         }
 
-        console.log(false);
         return false;
       } catch (error) {
         console.log(error);

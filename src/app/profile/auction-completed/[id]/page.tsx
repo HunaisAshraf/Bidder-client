@@ -41,8 +41,6 @@ export default async function Statement({
 }) {
   const data = await getData(params.id);
 
-  console.log(data);
-
   const winData = {
     item: data?.auctionData.auctionItem.itemName,
     description: data?.auctionData.auctionItem.description,

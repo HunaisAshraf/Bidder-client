@@ -41,7 +41,6 @@ export default async function BiddingHistory() {
 
   if (data?.success) {
     bids = data.biddingHistory;
-    console.log(bids);
   }
 
   return (

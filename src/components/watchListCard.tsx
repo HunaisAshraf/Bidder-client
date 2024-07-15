@@ -55,8 +55,6 @@ const WatchListCard = ({ auction, id, setChange }: AuctionProps) => {
       );
 
       if (data.success) {
-        console.log("deleteing");
-
         setChange((prev) => (prev = !prev));
         toast.success("removed from watchlist");
       }

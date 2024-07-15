@@ -61,7 +61,6 @@ export default function ProfilePictureModal() {
           "Content-Type": "multipart/form-data",
         },
       });
-      console.log(data);
 
       if (data.success) {
         const user = {

@@ -63,7 +63,6 @@ export default function BidderListComponent({
 
   useEffect(() => {
     socket?.on("newBid", (bid) => {
-      console.log(bid);
       setBids((prev) => [bid, ...prev]);
     });
   }, [socket]);

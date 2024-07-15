@@ -52,8 +52,6 @@ export default function SingleAuction({
         bidAmount,
         auctionId,
       });
-
-      console.log(data);
     } catch (error: any) {
       console.log(error);
       if (error?.response?.data?.error === "user not authorised") {
@@ -75,8 +73,6 @@ export default function SingleAuction({
         secondUser: auction?.auctioner,
       });
       if (data.success) {
-        console.log(data);
-
         router.push("/chat");
       }
     } catch (error) {
@@ -133,7 +129,6 @@ export default function SingleAuction({
             setAuction(data.auction);
           }
         }
-        console.log(auction);
       } catch (error: any) {
         console.log(error);
       }

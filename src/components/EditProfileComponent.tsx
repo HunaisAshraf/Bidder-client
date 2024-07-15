@@ -60,7 +60,6 @@ export default function EditProfileComponent() {
       setLoading(true);
 
       let image;
-      console.log("kjsdanfkjsdf", formValue);
 
       if (formValue.images && formValue.images.length > 0) {
         const { data } = await axios.post("/api/s3-upload", formValue, {
@@ -68,7 +67,6 @@ export default function EditProfileComponent() {
             "Content-Type": "multipart/form-data",
           },
         });
-        console.log(data);
 
         if (data.success) {
           image = data.uploadedImage[0];
@@ -81,8 +79,6 @@ export default function EditProfileComponent() {
         phone: formValue.phone,
         profilePicture: image,
       };
-
-      console.log(updateuser);
 
       const { data } = await axiosInstance.put(
         `/api/v1/auth/update-user`,

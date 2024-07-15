@@ -57,8 +57,6 @@ export default function Auctions() {
         `/api/v1/auction/filter-auction/?filter=${filter}&page=${page}`
       );
       if (data.success) {
-        console.log(data);
-
         setAuctions(data.auctions);
         setCount(data.count);
       }
@@ -114,7 +112,6 @@ export default function Auctions() {
       console.log(error);
     }
   };
-  console.log(auctions);
 
   const downloadReport = async () => {
     const workSheet = utils.json_to_sheet(
@@ -149,8 +146,6 @@ export default function Auctions() {
           `/api/v1/auction/admin-get-auction/?page=${page}`
         );
         if (data.success) {
-          console.log(data.auctions);
-
           setAuctions(data.auctions);
           setCount(data.count);
         }

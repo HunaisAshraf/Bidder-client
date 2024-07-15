@@ -54,8 +54,6 @@ export default function Header() {
 
   const dispatch = useAppDispatch();
 
-  console.log("env", process.env.NEXT_PUBLIC_SERVER_HOST);
-
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -131,7 +129,6 @@ export default function Header() {
 
   useEffect(() => {
     socket?.on("notification_send", ({ user, newMessage }) => {
-      console.log("notification received", user, newMessage);
       dispatch(addNotification({ user, newMessage }));
     });
 
@@ -149,7 +146,6 @@ export default function Header() {
           "/api/v1/notification/get-notification"
         );
         if (data.success) {
-          console.log(data.notifications);
           setnotificationCount(count(data.notifications, user?._id));
 
           setNotifications(data.notifications);

@@ -57,10 +57,8 @@ export default function AuctionTable() {
           "/api/v1/auction/get-auctions"
         );
 
-        console.log(data);
         if (data.success) {
           setAuctions(data?.auctions);
-          console.log("auction", auctions);
         }
       } catch (error) {
         console.log(error);

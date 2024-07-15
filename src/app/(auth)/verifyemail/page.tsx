@@ -24,8 +24,6 @@ function Verify() {
           email,
         });
 
-        console.log(data);
-
         if (data.success) {
           setVerifying(false);
           if (type === "forgotPassword") {

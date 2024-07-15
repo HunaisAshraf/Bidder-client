@@ -40,8 +40,6 @@ export default function SignupForm() {
         formData
       );
 
-      console.log(data);
-
       if (data?.success) {
         const user = {
           _id: data?.user?._id,
