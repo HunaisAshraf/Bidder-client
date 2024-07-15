@@ -71,7 +71,6 @@ const ChartComponent = () => {
           Dashboard
         </h1>
         <div className="flex flex-col lg:flex-row gap-5">
-          {/* Main Charts Section */}
           <div className="flex-1">
             <div className="chart bg-white rounded shadow-md mb-5">
               <div className="p-2">

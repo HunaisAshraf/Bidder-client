@@ -198,7 +198,6 @@ export default function Users() {
                     </button>
                   )}
                 </TableCell>
-                {/* <button onClick={handleOpen}>Open responsive dialog</button> */}
               </TableRow>
             ))}
             <Modal

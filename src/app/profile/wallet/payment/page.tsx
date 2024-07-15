@@ -42,7 +42,6 @@ function Payment() {
     <div>
       {clientSecret && (
         <Elements stripe={stripePromise} options={options}>
-          {/* <PaymentModal /> */}
           <PaymentForm />
         </Elements>
       )}

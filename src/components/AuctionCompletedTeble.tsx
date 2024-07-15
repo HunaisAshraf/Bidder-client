@@ -65,8 +65,6 @@ export default function AuctionCompletedTable({
               <TableCell align="right">Base Price</TableCell>
               <TableCell align="right">Bid Price</TableCell>
               <TableCell align="right">Statement</TableCell>
-              {/* <TableCell align="right">Invoice</TableCell> */}
-              {/* <TableCell align="right">Bid Date</TableCell> */}
             </TableRow>
           </TableHead>
           <TableBody>
@@ -104,10 +102,6 @@ export default function AuctionCompletedTable({
                       Statement
                     </button>
                   </TableCell>
-
-                  {/* <TableCell align="right">
-                    {moment(auction?.).format("lll")}
-                    </TableCell> */}
                 </TableRow>
               ))}
           </TableBody>

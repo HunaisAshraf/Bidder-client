@@ -278,13 +278,6 @@ export default function ChatComponent({ onChatSelect }: { onChatSelect: any }) {
         <div ref={messagesEndRef} />
       </div>
       <form className="flex  mt-2 items-center" onSubmit={sendMessage}>
-        {/* <input
-          type="text"
-          placeholder="send message"
-          value={newMessage}
-          onChange={(e) => setNewMessage(e.target.value)}
-          className="outline-none border-2 p-2 w-full"
-        /> */}
         <button type="button" onClick={() => inputRef.current?.click()}>
           <AddIcon />
         </button>

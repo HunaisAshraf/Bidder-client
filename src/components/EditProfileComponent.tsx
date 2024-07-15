@@ -188,33 +188,7 @@ export default function EditProfileComponent() {
                     {...register("phone", {})}
                     errors={errors.phone?.message}
                   />
-                  {/* <Input
-                  type="password"
-                  placeholder="Password"
-                  icon={<PasswordRoundedIcon />}
-                  {...register("password", {
-                    required: "Please enter password",
-                    pattern: {
-                      value:
-                        /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/,
-                      message:
-                        "Password must contain at least 8 characters, 1 upper & lowercase letter, 1 number, on 1 special character",
-                    },
-                  })}
-                  errors={errors.password?.message}
-                />
-                <Input
-                  type="password"
-                  placeholder="Confirm Password"
-                  icon={<PasswordRoundedIcon />}
-                  {...register("confirmPassword", {
-                    validate: (value) => {
-                      const password = getValues("password");
-                      return password === value || "Password dosen't match";
-                    },
-                  })}
-                  errors={errors.confirmPassword?.message}
-                /> */}
+
                   {loading ? (
                     <Spinner />
                   ) : (

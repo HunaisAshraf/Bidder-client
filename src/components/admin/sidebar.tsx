@@ -64,7 +64,6 @@ export default function SideBar() {
                   } flex items-center text-slate-700 p-2 hover:bg-blue-400 hover:text-white rounded-md cursor-pointer my-3`}
                 >
                   {link.icon}
-                  {/* <span className="ml-2">{link.title}</span> */}
                 </div>
               </Link>
             );
