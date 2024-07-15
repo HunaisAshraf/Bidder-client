@@ -25,75 +25,71 @@ type Auctions = {
 
 const styles = StyleSheet.create({
   body: {
-    paddingTop: 35,
-    paddingBottom: 65,
-    paddingHorizontal: 35,
+    padding: 40,
+    paddingTop: 60,
+    paddingBottom: 60,
+    paddingHorizontal: 60,
     fontFamily: "Helvetica",
+    backgroundColor: "#f5f5f5",
+    border: "2px solid #000",
+    borderRadius: 10,
   },
   title: {
-    fontSize: 24,
+    fontSize: 28,
     fontWeight: "bold",
-    marginBottom: 20,
     textAlign: "center",
+    marginBottom: 20,
+    textDecoration: "underline",
+    color: "#003366",
+  },
+  subtitle: {
+    fontSize: 16,
+    textAlign: "center",
+    marginBottom: 30,
+    fontStyle: "italic",
+    color: "#003366",
+  },
+  content: {
+    fontSize: 14,
+    textAlign: "center",
+    marginBottom: 20,
+    lineHeight: 1.5,
   },
   user: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginBottom: 20,
-  },
-  bill: {
-    fontSize: 16,
-    fontWeight: "bold",
+    marginBottom: 30,
   },
   name: {
     fontSize: 14,
-    marginLeft: 10,
-    marginTop: 5,
+    textAlign: "center",
+    marginBottom: 5,
   },
-  product: {
+  extraContent: {
     marginTop: 20,
+    fontSize: 14,
+    textAlign: "center",
+    lineHeight: 1.5,
   },
-  table: {
-    display: "flex",
-    width: "auto",
-    marginTop: 10,
-  },
-  tableRow: {
+  signatureRow: {
+    marginTop: 40,
     flexDirection: "row",
-    width: "100%",
+    justifyContent: "space-around",
   },
-  tableColHeader: {
-    width: "25%",
-    borderStyle: "solid",
-    borderWidth: 1,
-    borderLeftWidth: 0,
-    borderTopWidth: 0,
-    backgroundColor: "#f0f0f0",
+  signature: {
+    borderTopWidth: 1,
+    width: 200,
     textAlign: "center",
-    padding: 5,
+    marginTop: 20,
+    fontSize: 12,
   },
-  tableCol: {
-    width: "25%",
-    borderStyle: "solid",
-    borderWidth: 1,
-    borderLeftWidth: 0,
-    borderTopWidth: 0,
+  signatureText: {
+    fontSize: 12,
     textAlign: "center",
-    padding: 5,
   },
-  tableCellHeader: {
-    fontSize: 10,
-    fontWeight: "bold",
-  },
-  tableCell: {
-    fontSize: 10,
-    wordWrap: "break-word",
-  },
-  image: {
-    width: 50,
-    height: 50,
-    margin: "auto",
+  date: {
+    fontSize: 12,
+    textAlign: "center",
+    marginTop: 10,
+    fontStyle: "italic",
   },
 });
 
@@ -108,60 +104,40 @@ const InvoiceDocument = ({
     <Document>
       <Page size="A4" style={styles.body}>
         <View>
-          <Text style={styles.title}>Bidder</Text>
+          <Text style={styles.title}>Certificate of Appreciation</Text>
+          <Text style={styles.subtitle}>Awarded To</Text>
         </View>
         <View style={styles.user}>
-          <View>
-            <Text style={styles.bill}>BILL To:</Text>
-            <Text style={styles.name}>{user?.name}</Text>
-            <Text style={styles.name}>{user?.phone}</Text>
-            <Text style={styles.name}>{user?.email}</Text>
-          </View>
-          <View>
-            <Text style={styles.name}>
-              Invoice No: {Math.round(Math.random() * 100000 + 1)}
-            </Text>
-            <Text style={styles.name}>
-              Invoice Date: {new Date().toLocaleString()}
-            </Text>
-          </View>
+          <Text style={styles.name}>{user?.name}</Text>
+          <Text style={styles.name}>
+            For Your Outstanding Bid on the Auction
+          </Text>
         </View>
-        <View style={styles.product}>
-          <View style={styles.table}>
-            <View style={styles.tableRow}>
-              <View style={styles.tableColHeader}>
-                <Text style={styles.tableCellHeader}>Product</Text>
-              </View>
-              <View style={styles.tableColHeader}>
-                <Text style={styles.tableCellHeader}>Auction Date</Text>
-              </View>
-              <View style={styles.tableColHeader}>
-                <Text style={styles.tableCellHeader}>Base Price</Text>
-              </View>
-              <View style={styles.tableColHeader}>
-                <Text style={styles.tableCellHeader}>Bid Price</Text>
-              </View>
-            </View>
-            <View style={styles.tableRow}>
-              <View style={styles.tableCol}>
-                <Text style={styles.tableCell}>
-                  {auction?.auctionItem?.itemName}
-                </Text>
-              </View>
-              <View style={styles.tableCol}>
-                <Text style={styles.tableCell}>
-                  {moment(auction?.auctionItem?.endDate).format("lll")}
-                </Text>
-              </View>
-              <View style={styles.tableCol}>
-                <Text style={styles.tableCell}>
-                  {auction?.auctionItem?.basePrice}
-                </Text>
-              </View>
-              <View style={styles.tableCol}>
-                <Text style={styles.tableCell}>{auction?.bidAmount}</Text>
-              </View>
-            </View>
+        <View>
+          <Text style={styles.content}>
+            This is to certify that {user?.name} has successfully participated
+            in the auction for the item "{auction?.auctionItem?.itemName}". We
+            appreciate your enthusiasm and contribution to our auction event.
+          </Text>
+        </View>
+        <View style={styles.extraContent}>
+          <Text>
+            Auction Date: {moment(auction?.auctionItem?.endDate).format("LL")}
+          </Text>
+          <Text>Base Price: ${auction?.auctionItem?.basePrice}</Text>
+          <Text>Bid Amount: ${auction?.bidAmount}</Text>
+        </View>
+        <View style={styles.date}>
+          <Text>Date: {new Date().toLocaleDateString()}</Text>
+        </View>
+        <View style={styles.signatureRow}>
+          <View>
+            <Text style={styles.signature}>Signature</Text>
+            <Text style={styles.signatureText}>Event Coordinator</Text>
+          </View>
+          <View>
+            <Text style={styles.signature}>Signature</Text>
+            <Text style={styles.signatureText}>Auction Manager</Text>
           </View>
         </View>
       </Page>
