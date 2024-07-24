@@ -175,7 +175,7 @@ export default function AddAuctionModal({
                             pattern: {
                               value: /^[A-Za-z]+$/i,
                               message:
-                                "Please valid characters only. [Alphabets A to Z, a to z ]",
+                                "Please enter valid characters only. [Alphabets A to Z, a to z ]",
                             },
                           })}
                         />
@@ -233,7 +233,7 @@ export default function AddAuctionModal({
                               const today = new Date();
                               today.setHours(today.getHours() - 24);
                               if (today && new Date(value) < today) {
-                                return "End date must be after current date";
+                                return "Start date must be after current date";
                               }
                               return true;
                             },
@@ -321,7 +321,7 @@ export default function AddAuctionModal({
                     <Spinner />
                   ) : (
                     <button className="bg-[#002A2C] w-full text-white font-semibold p-3 rounded-md">
-                      SignUp
+                      Submit
                     </button>
                   )}
                 </form>

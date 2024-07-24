@@ -56,14 +56,14 @@ export default function SignupForm() {
 
         router.replace("/role");
       }
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
       setLoading(false);
-      toast.error("failed to signup");
+      toast.error(error.response.data.error);
     }
   };
   return (
-    <div>
+    <div className="my-3">
       <Toaster />
       <form
         className="w-[400px]"
@@ -124,7 +124,7 @@ export default function SignupForm() {
             pattern: {
               value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/,
               message:
-                "Password must contain at least 8 characters, 1 upper & lowercase letter, 1 number, on 1 special character",
+                "Password must contain at least 8 characters, 1 upper & lowercase letter, 1 number and 1 special character",
             },
           })}
           errors={errors.password?.message}
