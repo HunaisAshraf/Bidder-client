@@ -154,7 +154,9 @@ export default function Header() {
         console.log(error);
       }
     };
-    getNotifications();
+    if (user) {
+      getNotifications();
+    }
   }, [socket, notification, router]);
 
   return (
