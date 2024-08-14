@@ -18,6 +18,7 @@ const adminSlice = createSlice({
         profilePicture: auction.payload.profilePicture,
         role: auction.payload.role,
         token: auction.payload.token,
+        isVerified: auction.payload.isVerified,
         isActive: auction.payload.isActive,
       };
     },
