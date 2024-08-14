@@ -9,6 +9,7 @@ export type User = {
   token: string;
   role: string;
   isActive: boolean;
+  isVerified: boolean;
 };
 
 export type AuthData = {

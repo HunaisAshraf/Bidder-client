@@ -74,27 +74,29 @@ export default function ProfileComponent() {
           <EditProfileComponent />
         </div>
       </div>
-      <div className="my-10">
-        <ul className="flex flex-wrap items-center gap-3 md:gap-6">
-          {filteredLink.map((l) => {
-            const isActive = pathname === l.href ? true : false;
-            return (
-              <li key={l.title}>
-                <Link
-                  className={
-                    isActive
-                      ? "text-blue-600 font-semibold"
-                      : "text-gray-500 font-semibold"
-                  }
-                  href={l.href}
-                >
-                  {l.title}
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
-      </div>
+      {user?.isVerified && (
+        <div className="my-10">
+          <ul className="flex flex-wrap items-center gap-3 md:gap-6">
+            {filteredLink.map((l) => {
+              const isActive = pathname === l.href ? true : false;
+              return (
+                <li key={l.title}>
+                  <Link
+                    className={
+                      isActive
+                        ? "text-blue-600 font-semibold"
+                        : "text-gray-500 font-semibold"
+                    }
+                    href={l.href}
+                  >
+                    {l.title}
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }

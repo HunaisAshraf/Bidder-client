@@ -1,4 +1,5 @@
 import ProfileComponent from "@/components/ProfileComponent";
+import VerifiedRoute from "@/components/VerifiedRoute";
 import React, { ReactNode } from "react";
 
 export default function ProfileLayout({
@@ -9,7 +10,9 @@ export default function ProfileLayout({
   return (
     <div className="mx-3 md:mx-36">
       <ProfileComponent />
-      <div>{children}</div>
+      <VerifiedRoute>
+        <div>{children}</div>
+      </VerifiedRoute>
     </div>
   );
 }

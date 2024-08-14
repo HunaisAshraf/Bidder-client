@@ -1,5 +1,7 @@
 "use client";
 
+import { setUser } from "@/lib/store/features/userSlice";
+import { useAppDispatch } from "@/lib/store/hooks";
 import { axiosInstance } from "@/utils/constants";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
@@ -9,6 +11,7 @@ function Verify() {
   const router = useRouter();
 
   const searchParams = useSearchParams();
+  const dispatch = useAppDispatch();
 
   const type = searchParams.get("type");
   const token = searchParams.get("token");
@@ -26,6 +29,10 @@ function Verify() {
 
         if (data.success) {
           setVerifying(false);
+          localStorage.setItem("auth", JSON.stringify(data.user));
+
+          dispatch(setUser(data.user));
+
           if (type === "forgotPassword") {
             router.replace(`/update-password/?email=${email}`);
           } else {
