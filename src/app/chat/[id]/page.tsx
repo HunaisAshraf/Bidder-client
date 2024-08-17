@@ -17,7 +17,6 @@ export default function page({ params }: { params: { id: string } }) {
     if (meetingContainerRef.current) {
       const appID = Number(process.env.NEXT_PUBLIC_ZEGO_APPID!);
       const serverSecret = "6ffd75820ef5a5e5851c6c0d01585a73";
-      console.log(serverSecret);
       const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(
         appID,
         serverSecret,
