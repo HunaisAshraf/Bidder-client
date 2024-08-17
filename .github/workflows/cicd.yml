@@ -29,6 +29,7 @@ jobs:
             --build-arg NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY="${{ secrets.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY }}" \
             --build-arg NEXT_PUBLIC_CLIENT_URL="${{ secrets.NEXT_PUBLIC_CLIENT_URL }}" \
             --build-arg NEXT_PUBLIC_ZEGO_APPID="${{ secrets.NEXT_PUBLIC_ZEGO_APPID }}" \
+            --build-arg NEXT_PUBLIC_ZEGO_SECRET="${{ secrets.NEXT_PUBLIC_ZEGO_SECRET }}" \
             --build-arg NEXT_PUBLIC_SERVER_SECRET="${{ secrets.NEXT_PUBLIC_SERVER_SECRET }}" .
       - name: Push to docker image
         run: docker push hunais/bidder-frontend:latest
